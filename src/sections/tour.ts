@@ -5,6 +5,7 @@ import { overlineHtml } from '../components/overline';
 import { pillTagHtml } from '../components/buttons';
 import { getNextShow, isPlayed, formatShortDate, countdownTo, type TourDate } from '../lib/tour-helpers';
 import { isTouchDevice, prefersReducedMotion } from '../lib/reduced-motion';
+import { assetUrl } from '../lib/asset-url';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -160,7 +161,7 @@ function mountRowPreview(section: HTMLElement): void {
       activeRow = row;
       const src = row?.dataset.poster;
       if (row && src) {
-        previewImg.src = src;
+        previewImg.src = assetUrl(src);
         gsap.to(preview, { autoAlpha: 1, duration: 0.25 });
       } else {
         gsap.to(preview, { autoAlpha: 0, duration: 0.25 });

@@ -4,6 +4,7 @@ import { Flip } from 'gsap/Flip';
 import content from '../content.json';
 import { overlineHtml } from '../components/overline';
 import { isTouchDevice, prefersReducedMotion } from '../lib/reduced-motion';
+import { assetUrl } from '../lib/asset-url';
 
 gsap.registerPlugin(ScrollTrigger, Flip);
 
@@ -36,7 +37,7 @@ export function mountLineup(root: HTMLElement): void {
               <picture>
                 <source type="image/avif" srcset="${srcset(p.slug, 'avif')}" sizes="320px" />
                 <source type="image/webp" srcset="${srcset(p.slug, 'webp')}" sizes="320px" />
-                <img src="/img/lineup/${p.slug}-640.jpg" srcset="${srcset(p.slug, 'jpg')}" sizes="320px" alt="" loading="lazy" decoding="async" />
+                <img src="${assetUrl(`/img/lineup/${p.slug}-640.jpg`)}" srcset="${srcset(p.slug, 'jpg')}" sizes="320px" alt="" loading="lazy" decoding="async" />
               </picture>
               <span class="lineup__card-shine" aria-hidden="true"></span>
             </span>
@@ -57,7 +58,7 @@ export function mountLineup(root: HTMLElement): void {
 
 function srcset(slug: string, ext: string): string {
   const widths = [640, 1024, 1440, 1920];
-  return widths.map((w) => `/img/lineup/${slug}-${w}.${ext} ${w}w`).join(', ');
+  return widths.map((w) => `${assetUrl(`/img/lineup/${slug}-${w}.${ext}`)} ${w}w`).join(', ');
 }
 
 function mountCarousel(section: HTMLElement, count: number): void {
@@ -203,7 +204,7 @@ function mountLightbox(section: HTMLElement, posters: { slug: string; caption: s
     if (poster) {
       img.sizes = '(min-width: 768px) 720px, 90vw';
       img.srcset = srcset(poster.slug, 'jpg');
-      img.src = `/img/lineup/${poster.slug}-1920.jpg`;
+      img.src = assetUrl(`/img/lineup/${poster.slug}-1920.jpg`);
     } else {
       img.removeAttribute('srcset');
       img.src = sourceImg.currentSrc || sourceImg.src;

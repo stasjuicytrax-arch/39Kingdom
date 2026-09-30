@@ -1,6 +1,7 @@
 import { gsap } from 'gsap';
 import { SECTIONS } from './sections-registry';
 import { prefersReducedMotion } from './reduced-motion';
+import { assetUrl } from './asset-url';
 
 const CUSTOM_EASE = 'cubic-bezier(0.76, 0, 0.24, 1)';
 
@@ -88,7 +89,7 @@ export function mountMenu(): void {
     link.addEventListener('mouseenter', () => {
       const src = link.getAttribute('data-menu-bg-src');
       if (src) {
-        bg.style.backgroundImage = `url(${src})`;
+        bg.style.backgroundImage = `url(${assetUrl(src)})`;
         bg.style.opacity = '1';
       }
       for (const other of links) other.classList.toggle('menu-overlay__link--dim', other !== link);

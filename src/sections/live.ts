@@ -5,6 +5,7 @@ import content from '../content.json';
 import { overlineHtml } from '../components/overline';
 import { autoplayInViewport } from '../lib/viewport-video';
 import { isTouchDevice, prefersReducedMotion } from '../lib/reduced-motion';
+import { assetUrl } from '../lib/asset-url';
 
 gsap.registerPlugin(ScrollTrigger, Flip);
 
@@ -54,9 +55,9 @@ export function mountLive(root: HTMLElement): void {
 
   section.innerHTML = `
     <div class="live__intro" data-intro>
-      <video class="live__intro-video" data-intro-video muted loop playsinline preload="none" poster="${live.localVideos[0]?.poster ?? ''}" aria-hidden="true">
-        <source src="${live.localVideos[0]?.card.webm ?? ''}" type="video/webm" />
-        <source src="${live.localVideos[0]?.card.mp4 ?? ''}" type="video/mp4" />
+      <video class="live__intro-video" data-intro-video muted loop playsinline preload="none" poster="${live.localVideos[0] ? assetUrl(live.localVideos[0].poster) : ''}" aria-hidden="true">
+        <source src="${live.localVideos[0] ? assetUrl(live.localVideos[0].card.webm) : ''}" type="video/webm" />
+        <source src="${live.localVideos[0] ? assetUrl(live.localVideos[0].card.mp4) : ''}" type="video/mp4" />
       </video>
       <p class="live__intro-word" aria-hidden="true">live.</p>
     </div>
@@ -105,11 +106,11 @@ function cardHtml(item: DeckItem, i: number): string {
       <span class="live__card-media">
         ${
           item.kind === 'local' && item.cardVideo
-            ? `<video class="live__card-video" data-card-video muted loop playsinline preload="none" poster="${item.thumb}">
-                <source src="${item.cardVideo.webm}" type="video/webm" />
-                <source src="${item.cardVideo.mp4}" type="video/mp4" />
+            ? `<video class="live__card-video" data-card-video muted loop playsinline preload="none" poster="${assetUrl(item.thumb)}">
+                <source src="${assetUrl(item.cardVideo.webm)}" type="video/webm" />
+                <source src="${assetUrl(item.cardVideo.mp4)}" type="video/mp4" />
               </video>`
-            : `<img src="${item.thumb}" alt="" loading="lazy" decoding="async" />`
+            : `<img src="${assetUrl(item.thumb)}" alt="" loading="lazy" decoding="async" />`
         }
         <span class="live__card-play" aria-hidden="true">▶</span>
       </span>
@@ -276,8 +277,8 @@ function mountPlayer(section: HTMLElement, deck: DeckItem[]): void {
 
     stage.innerHTML =
       item.kind === 'local'
-        ? `<video src="${item.playSrc}" controls autoplay playsinline class="live-player__video"></video>`
-        : `<iframe src="${item.playSrc}" title="${item.caption}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen class="live-player__iframe"></iframe>`;
+        ? `<video src="${assetUrl(item.playSrc)}" controls autoplay playsinline class="live-player__video"></video>`
+        : `<iframe src="${assetUrl(item.playSrc)}" title="${item.caption}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen class="live-player__iframe"></iframe>`;
 
     const media = card.querySelector('img, video');
     if (!reduced && media) {

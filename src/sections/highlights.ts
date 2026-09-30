@@ -4,6 +4,7 @@ import content from '../content.json';
 import { overlineHtml } from '../components/overline';
 import { prefersReducedMotion } from '../lib/reduced-motion';
 import { isTouchDevice } from '../lib/reduced-motion';
+import { assetUrl } from '../lib/asset-url';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -171,7 +172,7 @@ function mountRowPreview(section: HTMLElement): void {
       activeRow = row;
       const src = row?.dataset.poster;
       if (row && src) {
-        previewImg.src = src;
+        previewImg.src = assetUrl(src);
         gsap.to(preview, { autoAlpha: 1, duration: 0.25 });
       } else {
         gsap.to(preview, { autoAlpha: 0, duration: 0.25 });

@@ -7,6 +7,7 @@ import { pillTagHtml } from '../components/buttons';
 import { autoplayInViewport } from '../lib/viewport-video';
 import { tokenColor } from '../lib/color-tokens';
 import { prefersReducedMotion } from '../lib/reduced-motion';
+import { assetUrl } from '../lib/asset-url';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -31,7 +32,7 @@ export function mountAbout(root: HTMLElement): void {
             <source type="image/avif" srcset="${srcset('about', 'about-portrait', 'avif')}" sizes="(min-width: 768px) 40vw, 90vw" />
             <source type="image/webp" srcset="${srcset('about', 'about-portrait', 'webp')}" sizes="(min-width: 768px) 40vw, 90vw" />
             <img
-              src="/img/about/about-portrait-1024.jpg"
+              src="${assetUrl('/img/about/about-portrait-1024.jpg')}"
               srcset="${srcset('about', 'about-portrait', 'jpg')}"
               sizes="(min-width: 768px) 40vw, 90vw"
               alt="39 KINGDOM duo portrait on a red backdrop"
@@ -60,7 +61,7 @@ export function mountAbout(root: HTMLElement): void {
 
 function srcset(sectionName: string, slug: string, ext: string): string {
   const widths = [640, 1024, 1440, 1920];
-  return widths.map((w) => `/img/${sectionName}/${slug}-${w}.${ext} ${w}w`).join(', ');
+  return widths.map((w) => `${assetUrl(`/img/${sectionName}/${slug}-${w}.${ext}`)} ${w}w`).join(', ');
 }
 
 type HeadlineToken = { text: string; mute: boolean };
@@ -87,9 +88,9 @@ function headingHtml(tokens: HeadlineToken[], pillVideo: { poster: string; mp4: 
 
 function pillHtml(pillVideo: { poster: string; mp4: string; webm: string }): string {
   return `<span class="about__pill" data-pill>
-    <video class="about__pill-video" muted loop playsinline preload="none" poster="${pillVideo.poster}" aria-hidden="true">
-      <source src="${pillVideo.webm}" type="video/webm" />
-      <source src="${pillVideo.mp4}" type="video/mp4" />
+    <video class="about__pill-video" muted loop playsinline preload="none" poster="${assetUrl(pillVideo.poster)}" aria-hidden="true">
+      <source src="${assetUrl(pillVideo.webm)}" type="video/webm" />
+      <source src="${assetUrl(pillVideo.mp4)}" type="video/mp4" />
     </video>
   </span>`;
 }

@@ -6,6 +6,7 @@ import content from '../content.json';
 import { pillOrbHtml, outlineButtonHtml } from '../components/buttons';
 import { getNextShow, formatShortDate, cityTimeZone } from '../lib/tour-helpers';
 import { prefersReducedMotion } from '../lib/reduced-motion';
+import { assetUrl } from '../lib/asset-url';
 
 gsap.registerPlugin(ScrollTrigger, SplitText, Flip);
 
@@ -25,7 +26,7 @@ export function mountHero(root: HTMLElement): void {
         <source type="image/avif" srcset="${srcset('hero', 'hero-main', 'avif')}" sizes="100vw" />
         <source type="image/webp" srcset="${srcset('hero', 'hero-main', 'webp')}" sizes="100vw" />
         <img
-          src="/img/hero/hero-main-1920.jpg"
+          src="${assetUrl('/img/hero/hero-main-1920.jpg')}"
           srcset="${srcset('hero', 'hero-main', 'jpg')}"
           sizes="100vw"
           alt="39 KINGDOM performing on a pyro-lit main stage"
@@ -34,7 +35,7 @@ export function mountHero(root: HTMLElement): void {
           decoding="async"
         />
       </picture>
-      <video class="hero__video" muted loop playsinline preload="none" poster="/img/hero/hero-main-1280.jpg" aria-hidden="true"></video>
+      <video class="hero__video" muted loop playsinline preload="none" poster="${assetUrl('/img/hero/hero-main-1280.jpg')}" aria-hidden="true"></video>
       <canvas class="hero__fx" aria-hidden="true" data-hero-fx></canvas>
       <div class="hero__scrim" aria-hidden="true"></div>
       <div class="hero__darken" aria-hidden="true"></div>
@@ -95,7 +96,7 @@ export function mountHero(root: HTMLElement): void {
 
 function srcset(section: string, slug: string, ext: string): string {
   const widths = [640, 1280, 1920, 2560];
-  return widths.map((w) => `/img/${section}/${slug}-${w}.${ext} ${w}w`).join(', ');
+  return widths.map((w) => `${assetUrl(`/img/${section}/${slug}-${w}.${ext}`)} ${w}w`).join(', ');
 }
 
 function mountLocalClock(section: HTMLElement, timeZone: string): void {
@@ -120,7 +121,7 @@ function mountMobileVideo(section: HTMLElement): void {
     if (mq.matches && !loaded) {
       loaded = true;
       const source = document.createElement('source');
-      source.src = '/video/hero-loop.mp4';
+      source.src = assetUrl('/video/hero-loop.mp4');
       source.type = 'video/mp4';
       video!.appendChild(source);
       video!.load();
