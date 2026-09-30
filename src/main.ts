@@ -14,10 +14,26 @@ import { mountHighlights } from './sections/highlights';
 import { mountLineup } from './sections/lineup';
 import { mountTour } from './sections/tour';
 import { mountLive } from './sections/live';
+import { mountMusic } from './sections/music';
+import { mountRecognition } from './sections/recognition';
+import { mountSocial } from './sections/social';
+import { mountContact } from './sections/contact';
+import { mountFooter } from './sections/footer';
 import { mountPlaceholderSection } from './sections/placeholder-section';
 import { initMagneticButtons } from './components/buttons';
 
-const BUILT_SECTIONS = new Set(['hero', 'about', 'highlights', 'lineup', 'tour', 'live']);
+const BUILT_SECTIONS = new Set([
+  'hero',
+  'about',
+  'highlights',
+  'lineup',
+  'tour',
+  'live',
+  'music',
+  'recognition',
+  'social',
+  'contact',
+]);
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
 
@@ -30,19 +46,25 @@ mountCursor();
 mountScrollProgress();
 mountGrain();
 
-// Real sections first, then empty anchors for the rest so menu links and
-// the header's section counter have real targets — filled in as each
-// section is built.
+// All ten sections, in page order, then the footer. The placeholder loop
+// below is now a no-op (every SECTIONS entry is built) — left in place so a
+// future new section falls back to an anchor automatically instead of
+// silently breaking menu navigation.
 mountHero(app);
 mountAbout(app);
 mountHighlights(app);
 mountLineup(app);
 mountTour(app);
 mountLive(app);
+mountMusic(app);
+mountRecognition(app);
+mountSocial(app);
+mountContact(app);
 for (const section of SECTIONS) {
   if (BUILT_SECTIONS.has(section.id)) continue;
   mountPlaceholderSection(app, section);
 }
+mountFooter(app);
 
 observeSections(header);
 initSmoothScroll();

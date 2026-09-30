@@ -1,0 +1,207 @@
+.music {
+  position: relative;
+  padding-block: var(--section-gap);
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+
+.music__head {
+  margin-bottom: var(--s-9);
+}
+
+.music__headline {
+  margin: var(--s-4) 0 var(--s-6);
+  max-width: 14ch;
+  font-family: var(--ff-display);
+  font-variation-settings: var(--v-grotesk);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  text-transform: uppercase;
+  color: var(--c-text);
+}
+
+.music__mute {
+  color: var(--c-mute-light);
+}
+
+.music__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1em;
+  width: 2.1em;
+  border-radius: var(--r-pill);
+  overflow: hidden;
+  vertical-align: middle;
+  margin-inline: 0.15em;
+}
+
+.music__pill img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.music__lead {
+  margin: 0;
+  max-width: 48ch;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--c-text-2);
+}
+
+.music__marquee {
+  margin-block: var(--s-9);
+  overflow: hidden;
+  border-block: 1px solid var(--c-line);
+  padding-block: var(--s-5);
+}
+
+.music__marquee-track {
+  display: flex;
+  align-items: center;
+  gap: var(--s-9);
+  white-space: nowrap;
+  width: max-content;
+  animation: music-marquee 36s linear infinite;
+}
+
+@keyframes music-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.music__label {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-small);
+  letter-spacing: var(--ls-meta);
+  text-transform: uppercase;
+  color: var(--c-text-2);
+  flex: none;
+}
+
+.music__label--logo img {
+  height: 28px;
+  width: auto;
+  display: block;
+  filter: brightness(0) saturate(100%) invert(9%) sepia(60%) saturate(3000%) hue-rotate(350deg) brightness(60%);
+}
+
+.music__streaming {
+  margin-bottom: var(--s-9);
+}
+
+.music__streaming-label {
+  margin: 0 0 var(--s-4);
+  font-family: var(--ff-mono);
+  font-size: var(--fs-meta);
+  letter-spacing: var(--ls-meta);
+  text-transform: uppercase;
+  color: var(--c-text-2);
+}
+
+.music__streaming-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+}
+
+.music__streaming-btn {
+  color: var(--c-oxblood);
+  border-color: rgba(30, 5, 3, 0.35);
+}
+
+.music__streaming-btn::before {
+  background: var(--c-oxblood);
+}
+
+.music__streaming-btn:hover,
+.music__streaming-btn:focus-visible {
+  color: var(--c-bone);
+  border-color: var(--c-oxblood);
+}
+
+.music__facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-6);
+}
+
+.music__fact {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: var(--s-6);
+  border-radius: var(--r-card);
+  background: var(--c-oxblood);
+  color: var(--c-bone);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.music__fact-vinyl {
+  position: absolute;
+  top: 50%;
+  right: -40px;
+  width: 140px;
+  height: 140px;
+  margin-top: -70px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle, var(--c-void) 0 2px, #1a1a1a 2px 4px);
+  box-shadow: inset 0 0 0 18px var(--c-oxblood), inset 0 0 0 20px rgba(239, 237, 235, 0.15);
+  transform: translateX(40px) rotate(0deg);
+  transition: transform var(--dur-slow) var(--ease-out-expo);
+  z-index: -1;
+}
+
+.music__fact:hover .music__fact-vinyl {
+  transform: translateX(0) rotate(180deg);
+}
+
+.music__fact-stat {
+  font-family: var(--ff-display);
+  font-variation-settings: var(--v-condensed);
+  font-size: var(--fs-h3);
+  line-height: 1;
+  color: var(--c-fire);
+}
+
+.music__fact-label {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-small);
+  letter-spacing: var(--ls-meta);
+  text-transform: uppercase;
+}
+
+.music__fact-detail {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--c-mute-light);
+  max-width: 34ch;
+}
+
+@media (max-width: 767px) {
+  .music__facts {
+    grid-template-columns: 1fr;
+  }
+
+  .music__fact-vinyl {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music__marquee-track {
+    animation: none;
+  }
+
+  .music__fact-vinyl {
+    transition: none;
+  }
+}

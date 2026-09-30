@@ -27,6 +27,10 @@ export function initMagneticButtons(root: ParentNode = document): void {
 
   const targets = root.querySelectorAll<HTMLElement>('.btn-pill-orb, .btn-red-orb');
   targets.forEach((el) => {
+    // Contact's BOOK orb runs its own section-wide cursor-chase (see
+    // contact.ts mountOrbChase) — a second independent quickTo on the same
+    // x/y would fight it, so it opts out via this marker.
+    if (el.dataset.customMagnet === 'true') return;
     const strength = el.classList.contains('btn-red-orb') ? 0.35 : 0.25;
     const maxOffset = el.classList.contains('btn-red-orb') ? 20 : 12;
     const xTo = gsap.quickTo(el, 'x', { duration: 0.5, ease: 'power3.out' });
