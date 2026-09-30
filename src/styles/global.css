@@ -3,12 +3,15 @@
 @import '@fontsource/jetbrains-mono/500.css';
 @import './tokens.css';
 @import './grid.css';
+@import './overline.css';
 @import './buttons.css';
 @import './header.css';
 @import './menu.css';
 @import './cursor.css';
 @import './scroll-progress.css';
 @import './hero.css';
+@import './about.css';
+@import './highlights.css';
 @import './section-placeholder.css';
 
 *,

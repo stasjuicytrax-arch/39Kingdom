@@ -1,0 +1,27 @@
+.overline {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin: 0 0 var(--s-4);
+  font-family: var(--ff-mono);
+  font-size: var(--fs-meta);
+  letter-spacing: var(--ls-meta);
+  text-transform: uppercase;
+  color: var(--c-ash);
+}
+
+.overline__asterisk {
+  display: inline-block;
+  color: var(--c-blood);
+  animation: overline-asterisk-spin 20s linear infinite;
+}
+
+@keyframes overline-asterisk-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overline__asterisk {
+    animation: none;
+  }
+}

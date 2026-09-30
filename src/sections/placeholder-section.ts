@@ -1,7 +1,8 @@
 import type { SectionEntry } from '../lib/sections-registry';
+import { overlineHtml } from '../components/overline';
 
-/** Empty anchor sections for 02–10 so the menu and header section-number tracking
- * have real targets to scroll to. Each is replaced by its real build in step 4. */
+/** Empty anchor sections for the parts of the page not yet built, so the menu
+ * and header section-number tracking have real targets to scroll to. */
 export function mountPlaceholderSection(root: HTMLElement, section: SectionEntry): void {
   const el = document.createElement('section');
   el.id = section.id;
@@ -9,7 +10,7 @@ export function mountPlaceholderSection(root: HTMLElement, section: SectionEntry
   el.setAttribute('aria-label', section.title);
   el.innerHTML = `
     <div class="container">
-      <p class="section-placeholder__overline"><span class="section-placeholder__asterisk" aria-hidden="true">✱</span> (${String(section.index).padStart(2, '0')})</p>
+      ${overlineHtml(section.index)}
       <h2 class="section-placeholder__title">${section.title}</h2>
     </div>
   `;

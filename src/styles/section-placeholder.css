@@ -5,24 +5,6 @@
   border-top: 1px solid var(--c-line);
 }
 
-.section-placeholder__overline {
-  display: flex;
-  align-items: center;
-  gap: var(--s-2);
-  margin: 0 0 var(--s-4);
-  font-family: var(--ff-mono);
-  font-size: var(--fs-meta);
-  letter-spacing: var(--ls-meta);
-  text-transform: uppercase;
-  color: var(--c-ash);
-}
-
-.section-placeholder__asterisk {
-  display: inline-block;
-  color: var(--c-blood);
-  animation: section-asterisk-spin 20s linear infinite;
-}
-
 .section-placeholder__title {
   margin: 0;
   font-family: var(--ff-display);
@@ -32,14 +14,4 @@
   letter-spacing: var(--ls-display);
   text-transform: uppercase;
   color: var(--c-text);
-}
-
-@keyframes section-asterisk-spin {
-  to { transform: rotate(360deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .section-placeholder__asterisk {
-    animation: none;
-  }
 }

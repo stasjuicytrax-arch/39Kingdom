@@ -9,8 +9,12 @@ import { mountCursor } from './lib/cursor';
 import { mountScrollProgress } from './lib/scroll-progress';
 import { SECTIONS } from './lib/sections-registry';
 import { mountHero } from './sections/hero';
+import { mountAbout } from './sections/about';
+import { mountHighlights } from './sections/highlights';
 import { mountPlaceholderSection } from './sections/placeholder-section';
 import { initMagneticButtons } from './components/buttons';
+
+const BUILT_SECTIONS = new Set(['hero', 'about', 'highlights']);
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
 
@@ -23,11 +27,14 @@ mountCursor();
 mountScrollProgress();
 mountGrain();
 
-// Hero first (real build), then empty anchors for 02–10 so menu links and
-// the header's section counter have real targets — filled in in step 4.
+// Real sections first, then empty anchors for the rest so menu links and
+// the header's section counter have real targets — filled in as each
+// section is built.
 mountHero(app);
+mountAbout(app);
+mountHighlights(app);
 for (const section of SECTIONS) {
-  if (section.id === 'hero') continue;
+  if (BUILT_SECTIONS.has(section.id)) continue;
   mountPlaceholderSection(app, section);
 }
 
