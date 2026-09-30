@@ -11,10 +11,13 @@ import { SECTIONS } from './lib/sections-registry';
 import { mountHero } from './sections/hero';
 import { mountAbout } from './sections/about';
 import { mountHighlights } from './sections/highlights';
+import { mountLineup } from './sections/lineup';
+import { mountTour } from './sections/tour';
+import { mountLive } from './sections/live';
 import { mountPlaceholderSection } from './sections/placeholder-section';
 import { initMagneticButtons } from './components/buttons';
 
-const BUILT_SECTIONS = new Set(['hero', 'about', 'highlights']);
+const BUILT_SECTIONS = new Set(['hero', 'about', 'highlights', 'lineup', 'tour', 'live']);
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
 
@@ -33,6 +36,9 @@ mountGrain();
 mountHero(app);
 mountAbout(app);
 mountHighlights(app);
+mountLineup(app);
+mountTour(app);
+mountLive(app);
 for (const section of SECTIONS) {
   if (BUILT_SECTIONS.has(section.id)) continue;
   mountPlaceholderSection(app, section);
