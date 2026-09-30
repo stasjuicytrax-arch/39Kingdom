@@ -1,0 +1,95 @@
+.has-custom-cursor,
+.has-custom-cursor a,
+.has-custom-cursor button {
+  cursor: none;
+}
+
+/* Outer element only ever receives a translate() transform (updated every
+   rAF frame in JS) — kept free of `transition` so position tracking stays
+   1:1 with the pointer instead of lagging behind an eased transform. */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  will-change: transform;
+  transition: opacity var(--dur-fast) var(--ease-soft);
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  margin: -4px;
+  border-radius: 50%;
+  background: var(--c-bone);
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  margin: -20px;
+}
+
+/* Inner element carries size/color state and animates via transform: scale()
+   instead of width/height so state changes never trigger layout. */
+.cursor-ring__inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid var(--c-bone);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform var(--dur-fast) var(--ease-soft), background-color var(--dur-fast) var(--ease-soft),
+    border-color var(--dur-fast) var(--ease-soft);
+  mix-blend-mode: difference;
+}
+
+.cursor-ring--pressed .cursor-ring__inner {
+  transform: scale(0.85);
+}
+
+.cursor-ring__label {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  letter-spacing: var(--ls-meta);
+  color: var(--c-bone);
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-soft);
+  white-space: nowrap;
+}
+
+.cursor-ring--link .cursor-ring__inner {
+  transform: scale(0.35);
+  background: var(--c-ember);
+  border-color: var(--c-ember);
+}
+
+.cursor-ring--play .cursor-ring__inner,
+.cursor-ring--drag .cursor-ring__inner,
+.cursor-ring--view .cursor-ring__inner {
+  transform: scale(3);
+  background: var(--c-blood);
+  border-color: var(--c-blood);
+}
+
+.cursor-ring--play .cursor-ring__label,
+.cursor-ring--drag .cursor-ring__label,
+.cursor-ring--view .cursor-ring__label {
+  opacity: 1;
+  /* counter-scale so the label reads at a fixed size despite the parent's scale(3) */
+  transform: scale(0.333);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot,
+  .cursor-ring,
+  .cursor-ring__inner {
+    transition: none;
+  }
+}

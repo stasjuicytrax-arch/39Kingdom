@@ -1,0 +1,155 @@
+/* ---------- Pill + Orb (primary) ---------- */
+.btn-pill-orb {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-2);
+  padding-left: var(--s-5);
+  border-radius: var(--r-pill);
+  background: var(--c-bone);
+  color: var(--c-oxblood);
+  text-decoration: none;
+  font-family: var(--ff-mono);
+  font-size: var(--fs-small);
+  letter-spacing: var(--ls-meta);
+  text-transform: uppercase;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: none;
+  transition: color var(--dur-base) var(--ease-soft);
+}
+
+.btn-pill-orb::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  width: 36px;
+  height: 36px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: var(--g-pyro);
+  z-index: -1;
+  transition: transform var(--dur-slow) var(--ease-out-expo);
+}
+
+.btn-pill-orb:hover::before,
+.btn-pill-orb:focus-visible::before {
+  transform: translateY(-50%) scale(10);
+}
+
+.btn-pill-orb:hover,
+.btn-pill-orb:focus-visible {
+  color: var(--c-bone);
+}
+
+.btn-pill-orb__orb {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--c-blood);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  color: var(--c-bone);
+  transition: background-color var(--dur-base) var(--ease-soft);
+}
+
+.btn-pill-orb:hover .btn-pill-orb__orb,
+.btn-pill-orb:focus-visible .btn-pill-orb__orb {
+  background: transparent;
+}
+
+/* ---------- Outline ---------- */
+.btn-outline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-5);
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(239, 237, 235, 0.4);
+  color: var(--c-bone);
+  text-decoration: none;
+  font-family: var(--ff-mono);
+  font-size: var(--fs-small);
+  letter-spacing: var(--ls-meta);
+  text-transform: uppercase;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: none;
+  transition: color var(--dur-base) var(--ease-soft), border-color var(--dur-base) var(--ease-soft);
+}
+
+.btn-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--c-bone);
+  transform: translateY(100%);
+  transition: transform var(--dur-base) var(--ease-out-expo);
+  z-index: -1;
+}
+
+.btn-outline:hover::before,
+.btn-outline:focus-visible::before {
+  transform: translateY(0);
+}
+
+.btn-outline:hover,
+.btn-outline:focus-visible {
+  color: var(--c-oxblood);
+  border-color: var(--c-bone);
+}
+
+/* ---------- Red Orb ---------- */
+.btn-red-orb {
+  --orb-size: 140px;
+  width: var(--orb-size);
+  height: var(--orb-size);
+  border-radius: 50%;
+  background: var(--c-blood);
+  color: var(--c-bone);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  font-family: var(--ff-mono);
+  font-size: var(--fs-small);
+  letter-spacing: var(--ls-meta);
+  text-transform: uppercase;
+  cursor: none;
+  box-shadow: var(--glow-ember);
+  flex: none;
+}
+
+.btn-red-orb span {
+  text-underline-offset: 4px;
+}
+
+/* ---------- Pill tag ---------- */
+.pill-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--s-1) var(--s-3);
+  border-radius: var(--r-pill);
+  border: 1px solid var(--c-line);
+  font-family: var(--ff-mono);
+  font-size: var(--fs-meta);
+  letter-spacing: var(--ls-meta);
+  text-transform: uppercase;
+  color: var(--c-text-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-pill-orb::before,
+  .btn-outline::before,
+  .btn-pill-orb,
+  .btn-outline {
+    transition: none;
+  }
+}

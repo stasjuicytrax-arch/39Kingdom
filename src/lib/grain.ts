@@ -5,6 +5,7 @@ export function mountGrain(): void {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canvas = document.createElement('canvas');
   canvas.id = 'grain';
+  canvas.setAttribute('aria-hidden', 'true');
   document.body.appendChild(canvas);
 
   const ctx = canvas.getContext('2d');

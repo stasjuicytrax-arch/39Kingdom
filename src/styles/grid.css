@@ -1,0 +1,50 @@
+/* 39 KINGDOM — grid system (design system §4)
+   12 cols ≥1280 / 8 cols 768–1279 / 4 cols <768, driven by --grid-cols in tokens.css */
+
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--grid-margin);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  column-gap: var(--grid-gutter);
+}
+
+/* Column-span utilities — desktop values; components override per breakpoint as needed */
+.col-1  { grid-column: span 1; }
+.col-2  { grid-column: span 2; }
+.col-3  { grid-column: span 3; }
+.col-4  { grid-column: span 4; }
+.col-5  { grid-column: span 5; }
+.col-6  { grid-column: span 6; }
+.col-7  { grid-column: span 7; }
+.col-8  { grid-column: span 8; }
+.col-9  { grid-column: span 9; }
+.col-10 { grid-column: span 10; }
+.col-11 { grid-column: span 11; }
+.col-12 { grid-column: span 12; }
+
+@media (max-width: 1279px) {
+  .col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12 {
+    grid-column: span 8;
+  }
+}
+
+@media (max-width: 767px) {
+  .col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12 {
+    grid-column: span 4;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

@@ -2,6 +2,14 @@
 @import '@fontsource/jetbrains-mono/400.css';
 @import '@fontsource/jetbrains-mono/500.css';
 @import './tokens.css';
+@import './grid.css';
+@import './buttons.css';
+@import './header.css';
+@import './menu.css';
+@import './cursor.css';
+@import './scroll-progress.css';
+@import './hero.css';
+@import './section-placeholder.css';
 
 *,
 *::before,
@@ -25,9 +33,32 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+
 #app {
   position: relative;
   min-height: 100svh;
+}
+
+/* Prevent background scroll bleed while the full-screen menu is open. */
+body.menu-open {
+  overflow: hidden;
 }
 
 canvas#grain {

@@ -1,0 +1,59 @@
+.scroll-rail {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2px;
+  z-index: var(--z-header);
+  background: rgba(239, 237, 235, 0.08);
+  pointer-events: none;
+}
+
+.scroll-rail__fill {
+  width: 100%;
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin: top;
+  background: var(--g-pyro);
+  will-change: transform;
+}
+
+.scroll-ruler {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-header);
+  display: none;
+  align-items: flex-start;
+  height: 6px;
+  padding-inline: var(--grid-margin);
+  gap: 3px;
+  pointer-events: none;
+}
+
+@media (min-width: 1280px) {
+  .scroll-ruler {
+    display: flex;
+  }
+}
+
+.scroll-ruler__tick {
+  flex: 1;
+  height: 6px;
+  transform: scaleY(0.5);
+  transform-origin: top;
+  background: rgba(239, 237, 235, 0.15);
+  transition: background-color var(--dur-fast) var(--ease-soft), transform var(--dur-fast) var(--ease-soft);
+}
+
+.scroll-ruler__tick--active {
+  background: var(--c-ember);
+  transform: scaleY(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-ruler__tick {
+    transition: none;
+  }
+}

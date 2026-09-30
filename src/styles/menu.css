@@ -1,0 +1,116 @@
+.menu-toggle {
+  position: fixed;
+  top: var(--s-4);
+  right: var(--grid-margin);
+  z-index: calc(var(--z-modal) + 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  appearance: none;
+  background: none;
+  border: 1px solid rgba(239, 237, 235, 0.3);
+  border-radius: var(--r-pill);
+  padding: var(--s-2) var(--s-4);
+  color: var(--c-bone);
+  font-family: var(--ff-mono);
+  font-size: var(--fs-meta);
+  letter-spacing: var(--ls-meta);
+  text-transform: uppercase;
+  cursor: none;
+  transition: border-color var(--dur-fast) var(--ease-soft), background-color var(--dur-fast) var(--ease-soft);
+}
+
+.menu-toggle:hover {
+  border-color: var(--c-bone);
+}
+
+.menu-open .menu-toggle {
+  background: var(--c-bone);
+  color: var(--c-oxblood);
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: none;
+  background: var(--c-void);
+  clip-path: inset(0 0 100% 0);
+}
+
+.menu-overlay__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-soft);
+}
+
+.menu-overlay__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 4, 4, 0.75) 0%, rgba(7, 4, 4, 0.92) 100%);
+}
+
+.menu-overlay__list {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--s-2);
+  padding-inline: var(--grid-margin);
+}
+
+.menu-overlay__item {
+  width: 100%;
+}
+
+.menu-overlay__link {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-4);
+  color: var(--c-bone);
+  text-decoration: none;
+  font-family: var(--ff-display);
+  font-variation-settings: var(--v-condensed);
+  font-size: clamp(32px, 7vw, 88px);
+  line-height: var(--lh-condensed);
+  letter-spacing: var(--ls-display);
+  text-transform: uppercase;
+  opacity: 1;
+  transition: opacity var(--dur-fast) var(--ease-soft), color var(--dur-fast) var(--ease-soft);
+}
+
+.menu-overlay__link:hover,
+.menu-overlay__link:focus-visible {
+  color: var(--c-fire);
+}
+
+.menu-overlay__link--dim {
+  opacity: 0.2;
+}
+
+.menu-overlay__num {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-meta);
+  letter-spacing: var(--ls-meta);
+  color: var(--c-ash);
+  min-width: 2.4ch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-toggle,
+  .menu-overlay__bg,
+  .menu-overlay__link {
+    transition: none;
+  }
+}

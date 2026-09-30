@@ -1,16 +1,38 @@
 import './styles/global.css';
-import './styles/placeholder.css';
-import { mountGrain } from './lib/grain';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const symbolUrl = `${import.meta.env.BASE_URL}img/brand/symbol-480.png`;
+import { mountGrain } from './lib/grain';
+import { initSmoothScroll } from './lib/smooth-scroll';
+import { mountHeader, observeSections } from './lib/header';
+import { mountMenu } from './lib/menu';
+import { mountCursor } from './lib/cursor';
+import { mountScrollProgress } from './lib/scroll-progress';
+import { SECTIONS } from './lib/sections-registry';
+import { mountHero } from './sections/hero';
+import { mountPlaceholderSection } from './sections/placeholder-section';
+import { initMagneticButtons } from './components/buttons';
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
-app.innerHTML = `
-  <div class="placeholder">
-    <img class="placeholder__symbol" src="${symbolUrl}" alt="39 KINGDOM symbol" width="160" height="160" />
-    <h1 class="placeholder__wordmark">39KINGDOM</h1>
-    <p class="placeholder__meta">PRESS KIT 2026 — WELCOME TO OUR KINGDOM</p>
-  </div>
-`;
 
+// Global chrome — header/menu/cursor/grain/scroll-progress sit outside #app
+// (fixed overlays). Header mounts first so its logo exists as the hero
+// wordmark's Flip-docking target.
+const header = mountHeader();
+mountMenu();
+mountCursor();
+mountScrollProgress();
 mountGrain();
+
+// Hero first (real build), then empty anchors for 02–10 so menu links and
+// the header's section counter have real targets — filled in in step 4.
+mountHero(app);
+for (const section of SECTIONS) {
+  if (section.id === 'hero') continue;
+  mountPlaceholderSection(app, section);
+}
+
+observeSections(header);
+initSmoothScroll();
+initMagneticButtons();
+
+window.addEventListener('load', () => ScrollTrigger.refresh());
