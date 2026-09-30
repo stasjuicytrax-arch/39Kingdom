@@ -1,0 +1,40 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Source media — never commit raw assets (>50MB limit, unprocessed originals)
+*.mov
+*.MOV
+*.ai
+*.AI
+*.docx
+/public/img/brand/symbol-source.png
+/src-media/
+*.psd
+
+# Raw photo/video source dumps (only compressed web output in public/ is tracked)
+**/PRESS PICS/
+**/SHOW PICS/
+**/Video/
+**/PDF ASSETS/source/

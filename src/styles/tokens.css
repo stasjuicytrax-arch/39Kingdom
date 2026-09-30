@@ -1,0 +1,112 @@
+/* ============================================================
+   39 KINGDOM — EMBER KINGDOM design tokens
+   Источник правды для вёрстки. См. 01_DESIGN_SYSTEM.md
+   Fonts: Archivo (variable wdth 62–125, wght 100–900), JetBrains Mono
+   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+   ============================================================ */
+
+:root {
+  /* ---------- Color ---------- */
+  --c-void:        #070404;
+  --c-night:       #100605;
+  --c-oxblood:     #1E0503;
+  --c-ember-deep:  #461001;
+  --c-blood:       #C8201A;
+  --c-ember:       #E5520C;
+  --c-fire:        #F5A124;
+  --c-flare:       #FBC86D;
+  --c-bone:        #EFEDEB;
+  --c-ash:         #8A7F7B;
+  --c-smoke:       #2A2322;
+  --c-mute-light:  #B7A7A3; /* приглушённые слова на светлой секции */
+
+  --c-bg:          var(--c-void);
+  --c-surface:     var(--c-night);
+  --c-text:        var(--c-bone);
+  --c-text-2:      var(--c-ash);
+  --c-line:        var(--c-smoke);
+  --c-accent:      var(--c-blood);
+  --c-accent-2:    var(--c-ember);
+
+  --g-pyro: linear-gradient(120deg, #461001 0%, #C8201A 40%, #E5520C 70%, #F5A124 100%);
+  --g-heat: radial-gradient(60% 50% at 50% 100%, #E5520C 0%, #8A1A08 35%, #070404 75%);
+  --g-oxblood-page: radial-gradient(80% 60% at 50% 40%, #3A0906 0%, #1E0503 45%, #070404 100%);
+  --g-scrim: linear-gradient(180deg, rgba(7,4,4,0) 40%, rgba(7,4,4,.85) 100%);
+
+  --glass-bg: rgba(16, 6, 5, 0.45);
+  --glass-line: rgba(239, 237, 235, 0.12);
+  --glass-blur: blur(18px) saturate(140%);
+
+  /* ---------- Type ---------- */
+  --ff-display: "Archivo", "Arial Narrow", sans-serif;
+  --ff-body:    "Archivo", system-ui, sans-serif;
+  --ff-mono:    "JetBrains Mono", ui-monospace, monospace;
+
+  --fs-giant: clamp(96px, 22vw, 420px);
+  --fs-h1:    clamp(64px, 12vw, 220px);
+  --fs-h2:    clamp(40px, 6.2vw, 112px);
+  --fs-h3:    clamp(24px, 2.6vw, 44px);
+  --fs-lead:  clamp(18px, 1.5vw, 24px);
+  --fs-body:  16px;
+  --fs-small: 13px;
+  --fs-meta:  11px;
+
+  --lh-condensed: 0.86;
+  --lh-display:   0.95;
+  --lh-body:      1.5;
+
+  --ls-giant:   -0.06em;
+  --ls-display: -0.045em;
+  --ls-cond:    -0.01em;
+  --ls-meta:     0.08em;
+
+  /* variable axes presets */
+  --v-condensed: "wdth" 62,  "wght" 850;
+  --v-grotesk:   "wdth" 100, "wght" 500;
+  --v-giant:     "wdth" 110, "wght" 300;
+  --v-body:      "wdth" 100, "wght" 400;
+
+  /* ---------- Space (4px base) ---------- */
+  --s-1: 4px;  --s-2: 8px;   --s-3: 12px;  --s-4: 16px;
+  --s-5: 24px; --s-6: 32px;  --s-7: 48px;  --s-8: 64px;
+  --s-9: 96px; --s-10: 128px; --s-11: 192px; --s-12: 256px;
+  --section-gap: clamp(128px, 16vw, 256px);
+
+  /* ---------- Grid ---------- */
+  --grid-cols: 12;
+  --grid-margin: clamp(20px, 3.3vw, 64px);
+  --grid-gutter: clamp(16px, 1.6vw, 28px);
+  --content-max: 1760px;
+
+  /* ---------- Radius ---------- */
+  --r-xs: 8px; --r-glass: 20px; --r-card: 28px; --r-hero: 40px; --r-pill: 999px;
+
+  /* ---------- Motion ---------- */
+  --ease-drop:     cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft:     cubic-bezier(0.33, 1, 0.68, 1);
+  --dur-fast: 250ms; --dur-base: 600ms; --dur-slow: 1200ms; --dur-epic: 2000ms;
+  --beat: 484ms; /* 124 BPM */
+
+  /* ---------- Effects ---------- */
+  --grain-opacity: 0.08;
+  --glow-ember: 0 0 40px rgba(229, 82, 12, .45), 0 0 120px rgba(200, 32, 26, .25);
+
+  /* ---------- Z ---------- */
+  --z-grain: 900; --z-cursor: 1000; --z-header: 800; --z-modal: 950; --z-preloader: 1100;
+}
+
+@media (max-width: 1279px) { :root { --grid-cols: 8; } }
+@media (max-width: 767px)  { :root { --grid-cols: 4; --grid-margin: 16px; --grid-gutter: 12px; } }
+
+/* Светлая секция «день» (REF 3) */
+.theme-bone {
+  --c-bg: var(--c-bone);
+  --c-text: var(--c-oxblood);
+  --c-text-2: var(--c-mute-light);
+  --c-line: #D9D2CF;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-base: 1ms; --dur-slow: 1ms; --dur-epic: 1ms; }
+}
