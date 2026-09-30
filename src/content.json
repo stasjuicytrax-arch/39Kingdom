@@ -1,0 +1,329 @@
+{
+  "meta": {
+    "title": "39 KINGDOM — Hybrid Electronic Live Duo | Press Kit 2026",
+    "description": "International electronic duo. Hybrid DJ sets with live vocals, guitar & drums. 500+ shows in 20+ countries. Melodic techno / tech house.",
+    "themeColor": "#070404"
+  },
+
+  "hero": {
+    "wordmark": "39KINGDOM",
+    "subtitle": "ELECTRONIC LIVE DUO / DJS / PRODUCERS",
+    "showType": "HYBRID DJ SET — DJ + LIVE VOCALS, GUITAR, DRUMS",
+    "genre": "MELODIC TECHNO / TECH HOUSE",
+    "lineupRow": [
+      { "num": "01", "label": "DJ SET" },
+      { "num": "02", "label": "LIVE VOCALS" },
+      { "num": "03", "label": "GUITAR" },
+      { "num": "04", "label": "DRUMS" }
+    ],
+    "stats": [
+      { "value": "500+", "label": "SHOWS" },
+      { "value": "20+", "label": "COUNTRIES" }
+    ],
+    "kicker": "PRESS KIT 2026",
+    "kickerRight": "WELCOME TO OUR KINGDOM",
+    "cta": {
+      "book": { "label": "BOOK THE SHOW", "href": "#contact" },
+      "watch": { "label": "WATCH LIVE", "href": "#live" }
+    }
+  },
+
+  "about": {
+    "overline": "✱ (02) WELCOME TO OUR KINGDOM",
+    "title": "ABOUT US",
+    "headline": [
+      { "text": "HYBRID SHOWS ", "mute": false },
+      { "text": "WHERE", "mute": true },
+      { "text": " ELECTRONIC PRODUCTION ", "mute": false },
+      { "text": "MEETS", "mute": true },
+      { "text": " REAL-TIME MUSICIANSHIP", "mute": false }
+    ],
+    "paragraphs": [
+      "39 KINGDOM is an international electronic duo known for their powerful hybrid performances, combining DJ sets with live instrumentation including vocals, guitar, and drums. Blending melodic techno, tech house, and indie dance, the project delivers a dynamic fusion of electronic music and live performance designed for both festival main stages and underground club environments.",
+      "The concept behind 39 KINGDOM is built on the synergy between electronic production and real-time musicianship. Their performances combine high-energy club music with live elements that add emotion, spontaneity, and intensity, creating an immersive experience while maintaining a strong dancefloor-driven sound. Precision, musicality, and crowd connection remain at the core of every performance."
+    ],
+    "tags": ["MELODIC TECHNO", "TECH HOUSE", "INDIE DANCE", "LIVE VOCALS", "GUITAR", "DRUMS"],
+    "portrait": { "section": "about", "slug": "about-portrait" },
+    "pillVideo": { "poster": "/video/india-poster.jpg", "mp4": "/video/india-pill.mp4", "webm": "/video/india-pill.webm" }
+  },
+
+  "highlights": {
+    "title": "PERFORMANCE HIGHLIGHTS",
+    "lead": "With over 500 performances across 20+ countries, 39 KINGDOM have established themselves as one of the most internationally experienced hybrid electronic acts, performing at leading festivals and iconic venues throughout Europe, Asia, and the Middle East.",
+    "counters": [
+      { "value": 500, "suffix": "+", "label": "PERFORMANCES" },
+      { "value": 20, "suffix": "+", "label": "COUNTRIES" },
+      { "value": 3, "suffix": "", "label": "CONTINENTS — EUROPE · ASIA · MIDDLE EAST" },
+      { "value": 100, "suffix": "K+", "label": "FOLLOWERS" }
+    ],
+    "venuesByCountry": [
+      {
+        "country": "SAUDI ARABIA",
+        "venues": [
+          { "name": "Soundstorm Festival", "city": "Riyadh", "poster": "poster-08-soundstorm-riyadh" },
+          { "name": "Freaks of Nature Festival", "city": "Riyadh", "poster": "poster-07-freaks-of-nature-riyadh" },
+          { "name": "Tahlia Factory Festival", "city": "Jeddah", "poster": "poster-06-tahlia-jeddah" }
+        ]
+      },
+      {
+        "country": "UAE",
+        "venues": [
+          { "name": "Atlantis The Royal", "city": "Dubai", "poster": "poster-01-atlantis-martin-garrix" },
+          { "name": "Terra Solis (Tomorrowland)", "city": "Dubai", "poster": "poster-09-echoes-of-the-sand-terra-solis" },
+          { "name": "Barasti Beach", "city": "Dubai", "poster": "poster-03-barasti-alan-walker-dubai" },
+          { "name": "RYTTS Festival", "city": "Dubai", "poster": null }
+        ]
+      },
+      {
+        "country": "INDIA",
+        "venues": [
+          { "name": "Sunburn Festival", "city": "Goa", "poster": "poster-05-sunburn-goa" },
+          { "name": "Quake Arena", "city": "Hyderabad", "poster": null },
+          { "name": "Prism", "city": "Hyderabad", "poster": null },
+          { "name": "Raeeth", "city": "Goa", "poster": null }
+        ]
+      },
+      {
+        "country": "NEPAL",
+        "venues": [{ "name": "LOD", "city": "Kathmandu", "poster": null }]
+      },
+      {
+        "country": "BELARUS",
+        "venues": [{ "name": "Viva Braslav Festival", "city": "Braslav", "poster": null }]
+      },
+      {
+        "country": "TURKEY",
+        "venues": [{ "name": "Kastel", "city": "Istanbul", "poster": null }]
+      },
+      {
+        "country": "THAILAND",
+        "venues": [
+          { "name": "Neon Countdown Festival", "city": "Bangkok", "poster": "poster-02-neon-countdown-bangkok" },
+          { "name": "Republic", "city": "Pattaya", "poster": null }
+        ]
+      },
+      {
+        "country": "VIETNAM",
+        "venues": [
+          { "name": "Heineken Countdown Festival", "city": "Hanoi", "poster": null },
+          { "name": "Ravolution Festival", "city": "Hanoi", "poster": null },
+          { "name": "1900 Le Théâtre", "city": "Hanoi", "poster": null },
+          { "name": "Watera Festival", "city": "Ho Chi Minh City", "poster": null },
+          { "name": "Envy", "city": "Ho Chi Minh City", "poster": null }
+        ]
+      },
+      {
+        "country": "PHILIPPINES",
+        "venues": [
+          { "name": "XYLO", "city": "Manila", "poster": null },
+          { "name": "Octopus", "city": "Manila", "poster": null }
+        ]
+      },
+      {
+        "country": "CHINA",
+        "venues": [
+          { "name": "IFC Festival", "city": "Xiamen", "poster": null },
+          { "name": "IMF Festival", "city": "Xiamen", "poster": null },
+          { "name": "Catapult", "city": "Ningbo", "poster": null },
+          { "name": "Space Plus", "city": "Chongqing", "poster": null },
+          { "name": "Play X", "city": "Shenzhen", "poster": null },
+          { "name": "Catwalk", "city": "Guangzhou", "poster": null }
+        ]
+      },
+      {
+        "country": "MYANMAR",
+        "venues": [{ "name": "Waterzonic Festival", "city": "", "poster": null }]
+      },
+      {
+        "country": "MALAYSIA",
+        "venues": [
+          { "name": "Peakstorm Festival", "city": "Kuala Lumpur", "poster": null },
+          { "name": "PITT", "city": "Kuala Lumpur", "poster": null }
+        ]
+      },
+      {
+        "country": "INDONESIA",
+        "venues": [
+          { "name": "LXXY", "city": "Bali", "poster": null },
+          { "name": "Atlas Super Club", "city": "Bali", "poster": null },
+          { "name": "The H Club", "city": "Jakarta", "poster": null }
+        ]
+      }
+    ],
+    "marqueeCities": ["RIYADH", "DUBAI", "GOA", "BANGKOK", "HANOI", "MANILA", "XIAMEN", "BALI", "ISTANBUL", "KUALA LUMPUR", "JEDDAH", "HO CHI MINH CITY", "KATHMANDU", "BRASLAV"]
+  },
+
+  "lineup": {
+    "title": "ON THE LINE-UP",
+    "subtitle": "SHARED BILLS WITH THE BIGGEST NAMES",
+    "posters": [
+      { "slug": "poster-01-atlantis-martin-garrix", "caption": "ATLANTIS LIVE — MARTIN GARRIX · SUPPORT 39 KINGDOM · DUBAI", "tag": "SUPPORT ACT" },
+      { "slug": "poster-02-neon-countdown-bangkok", "caption": "NEON COUNTDOWN 2024 · BANGKOK", "tag": "FESTIVAL" },
+      { "slug": "poster-03-barasti-alan-walker-dubai", "caption": "BARASTI RITUAL — ALAN WALKER · SUPPORT 39 KINGDOM · DUBAI", "tag": "SUPPORT ACT" },
+      { "slug": "poster-04-sunburn-mumbai-guetta", "caption": "SUNBURN — DAVID GUETTA · AXWELL · MUMBAI", "tag": "FESTIVAL" },
+      { "slug": "poster-05-sunburn-goa", "caption": "SUNBURN FESTIVAL · GOA", "tag": "FESTIVAL" },
+      { "slug": "poster-06-tahlia-jeddah", "caption": "TAHLIA — TIËSTO · SEBASTIAN INGROSSO · CLAPTONE · JEDDAH", "tag": "FESTIVAL" },
+      { "slug": "poster-07-freaks-of-nature-riyadh", "caption": "FREAKS OF NATURE · RIYADH", "tag": "FESTIVAL" },
+      { "slug": "poster-08-soundstorm-riyadh", "caption": "SOUNDSTORM 2023 · RIYADH", "tag": "FESTIVAL" },
+      { "slug": "poster-09-echoes-of-the-sand-terra-solis", "caption": "ECHOES OF THE SAND — CLAPTONE · NICKY ROMERO · KEVIN DE VRIES · TERRA SOLIS DUBAI", "tag": "FESTIVAL" }
+    ]
+  },
+
+  "tour": {
+    "title": "ON TOUR",
+    "season": "WINTER 2026",
+    "footnote": "MORE DATES WILL BE ANNOUNCED SOON",
+    "dates": [
+      { "date": "2026-11-13", "display": "13 NOV", "city": "Kuala Lumpur", "country": "Malaysia", "venue": "PITT Club", "festival": false },
+      { "date": "2026-11-15", "display": "15 NOV", "city": "Pattaya", "country": "Thailand", "venue": "Akira Club", "festival": false },
+      { "date": "2026-11-29", "display": "29 NOV", "city": "Bangkok", "country": "Thailand", "venue": "Muin Club", "festival": false },
+      { "date": "2026-12-20", "display": "20 DEC", "city": "Ho Chi Minh City", "country": "Vietnam", "venue": "District K", "festival": false },
+      { "date": "2026-12-28", "display": "28 DEC", "city": "Goa", "country": "India", "venue": "Sunburn Festival", "festival": true },
+      { "date": "2026-12-30", "display": "30 DEC", "city": "Pattaya", "country": "Thailand", "venue": "TBC", "festival": false },
+      { "date": "2026-12-31", "display": "31 DEC", "city": "Bangkok", "country": "Thailand", "venue": "Neon Countdown Festival", "festival": true }
+    ]
+  },
+
+  "live": {
+    "title": "LIVE SETS",
+    "footnote": "MORE LIVE SETS & VIDEOS ON OUR SOCIAL MEDIA",
+    "youtubeChannel": "https://www.youtube.com/@39Kingdom",
+    "sets": [
+      { "title": "SUNBURN — MUMBAI, INDIA", "duration": "1:21:39", "url": "https://youtu.be/GQ624tzHhRw" },
+      { "title": "FREAKS OF NATURE — RIYADH, SAUDI ARABIA", "duration": "41:09", "url": "https://www.youtube.com/watch?v=yBzTz_OEzBU" },
+      { "title": "KALININGRAD STADIUM (1001Tracklists Spotlight Mix)", "duration": "1:01:06", "url": "https://www.youtube.com/watch?v=u6ItRKTYuM8" },
+      { "title": "KÖNIGSBERG CATHEDRAL", "duration": "43:26", "url": "https://www.youtube.com/watch?v=H5QLvw5TydU" }
+    ],
+    "localVideos": [
+      {
+        "slug": "india",
+        "caption": "LIVE — INDIA",
+        "poster": "/video/india-poster.jpg",
+        "card": { "mp4": "/video/india-1080.mp4", "webm": "/video/india-1080.webm" },
+        "full": "/video/india-full.mp4"
+      },
+      {
+        "slug": "sunburn-camp",
+        "caption": "SUNBURN CAMP — INDIA",
+        "poster": "/video/sunburn-camp-poster.jpg",
+        "card": { "mp4": "/video/sunburn-camp-1080.mp4", "webm": "/video/sunburn-camp-1080.webm" },
+        "full": "/video/sunburn-camp-full.mp4"
+      },
+      {
+        "slug": "void-bangkok",
+        "caption": "VOID — BANGKOK",
+        "poster": "/video/void-bangkok-poster.jpg",
+        "card": { "mp4": "/video/void-bangkok-1080.mp4", "webm": "/video/void-bangkok-1080.webm" },
+        "full": "/video/void-bangkok-full.mp4"
+      }
+    ]
+  },
+
+  "music": {
+    "lead": "Alongside their live success, 39 KINGDOM continue to expand their footprint within the global electronic music industry through releases on internationally recognized labels.",
+    "headline": [
+      { "text": "RELEASED ON ", "mute": false },
+      { "text": "LABELS OF", "mute": true },
+      { "text": " ARMIN VAN BUUREN, ", "mute": false },
+      { "text": "HARDWELL", "mute": true },
+      { "text": ", R3HAB ", "mute": false },
+      { "text": "AND", "mute": true },
+      { "text": " ANDREW RAYEL", "mute": false }
+    ],
+    "labels": [
+      { "name": "Armada Music (Armin van Buuren)", "logoSlug": "label-armada" },
+      { "name": "Revealed (Hardwell)", "logoSlug": "label-revealed" },
+      { "name": "Cyberpunk (R3HAB)", "logoSlug": null },
+      { "name": "Mixmash (Laidback Luke)", "logoSlug": null },
+      { "name": "Find Your Harmony (Andrew Rayel)", "logoSlug": null },
+      { "name": "Panda Lab (Silver Panda)", "logoSlug": null },
+      { "name": "Interplay (Alexander Popov)", "logoSlug": null },
+      { "name": "Universal Music", "logoSlug": "label-universal" },
+      { "name": "Warner Music", "logoSlug": "label-warner" },
+      { "name": "AME Records", "logoSlug": null },
+      { "name": "LoudKult", "logoSlug": null },
+      { "name": "Sirup Music", "logoSlug": null },
+      { "name": "Lithuania HQ", "logoSlug": null }
+    ],
+    "streaming": {
+      "spotify": "",
+      "appleMusic": "",
+      "beatport": "",
+      "soundcloud": ""
+    },
+    "highlights": [
+      { "stat": "1.5M+", "label": "Spotify streams", "detail": "official cover of t.A.T.u.'s iconic \"All The Things She Said\"" },
+      { "stat": "Top 10", "label": "Apple Music & Spotify Vietnam", "detail": "collaboration with Vietnamese star Phùng Khánh Linh, 2M+ streams across all platforms" }
+    ],
+    "portrait": { "section": "music", "slug": "music-duo-portrait" }
+  },
+
+  "recognition": {
+    "title": "GLOBAL RECOGNITION",
+    "lead": "Throughout their career, 39 KINGDOM have shared the stage with some of the biggest names in global music — further solidifying their position as one of the rising hybrid electronic acts on the international scene.",
+    "names": [
+      "David Guetta", "Calvin Harris", "Swedish House Mafia", "Martin Garrix", "Tiësto", "Armin van Buuren",
+      "Deadmau5", "Skrillex", "Alesso", "Alan Walker", "Peggy Gou", "DJ Snake", "Black Coffee", "Solomun",
+      "Claptone", "Oliver Heldens", "Nicky Romero", "Alok", "Jamie Jones", "CamelPhat", "Meduza", "Argy",
+      "Morten", "Agents of Time", "Nic Fanciulli", "Fideles", "Chris Brown"
+    ],
+    "photos": [
+      { "slug": "with-martin-garrix-dubai", "caption": "WITH MARTIN GARRIX — DUBAI" },
+      { "slug": "with-martin-garrix-oliver-heldens-kuala-lumpur", "caption": "WITH MARTIN GARRIX, OLIVER HELDENS — KUALA LUMPUR" },
+      { "slug": "with-oliver-heldens-dj-snake-tiesto-saudi-arabia", "caption": "WITH OLIVER HELDENS, DJ SNAKE, TIËSTO — SAUDI ARABIA" },
+      { "slug": "with-axwell-ingrosso-india", "caption": "WITH AXWELL & INGROSSO — INDIA" },
+      { "slug": "with-claptone-jeddah", "caption": "WITH CLAPTONE — JEDDAH" },
+      { "slug": "with-r3hab-marnik-vion-konger-hanoi", "caption": "WITH R3HAB, MARNIK, VION KONGER — HANOI" },
+      { "slug": "with-morten-seven-dubai", "caption": "WITH MORTEN, SEVEN — DUBAI" },
+      { "slug": "with-vinai-dubai", "caption": "WITH VINAI — DUBAI" }
+    ],
+    "triptych": ["recognition-bw-1", "recognition-bw-2", "recognition-bw-3"]
+  },
+
+  "social": {
+    "lead": "Boasting over 100K followers across Instagram and Facebook, they've built a strong and engaged global fanbase.",
+    "handle": "@THE39KINGDOM",
+    "followers": "100K+",
+    "links": {
+      "instagram": "https://www.instagram.com/the39kingdom/",
+      "facebook": "https://www.facebook.com/the39kingdom",
+      "youtube": "https://www.youtube.com/@39Kingdom"
+    },
+    "gallery": [
+      { "slug": "festival-03-silhouette-hands-up" },
+      { "slug": "festival-06-guitarist-daylight" },
+      { "slug": "festival-07-vocalist-daylight" },
+      { "slug": "festival-14-neon-countdown" },
+      { "slug": "festival-21-red-pyramid-stage" },
+      { "slug": "festival-22-gold-dome-stage" },
+      { "slug": "festival-25-duo-embrace-backlit" },
+      { "slug": "festival-31-red-stage-crowd" },
+      { "slug": "club-01-flame-jets-crowd" },
+      { "slug": "club-10-duo-silhouette-branded" },
+      { "slug": "club-14-guitarist-silhouette-branded" },
+      { "slug": "club-17-flame-red-crowd-wide" },
+      { "slug": "club-26-vocalist-portrait" },
+      { "slug": "club-27-guitarist-solo" },
+      { "slug": "credit-mapurohit-09395", "credit": "PHOTO: @MAPUROHIT" },
+      { "slug": "credit-mapurohit-09531", "credit": "PHOTO: @MAPUROHIT" }
+    ]
+  },
+
+  "contact": {
+    "heading": "THANK YOU",
+    "subheading": "LET'S BUILD YOUR KINGDOM",
+    "email": "office@fenyx-artists.com",
+    "agency": "Fenyx Artists",
+    "downloads": {
+      "mediaKit": { "label": "DOWNLOAD MEDIA KIT", "href": "https://drive.google.com/drive/folders/1-j0u-JnWescepAnEru6qdfU1--FoVLxJ?usp=sharing" },
+      "pressRelease": { "label": "DOWNLOAD PRESS RELEASE", "href": "" },
+      "pressKit": { "label": "DOWNLOAD PRESS KIT (PDF)", "href": "" }
+    }
+  },
+
+  "footer": {
+    "wordmark": "39KINGDOM",
+    "tagline": "WELCOME TO OUR KINGDOM",
+    "copyright": "© 2026 39 KINGDOM"
+  }
+}

@@ -23,18 +23,14 @@ dist-ssr
 *.sln
 *.sw?
 
-# Source media — never commit raw assets (>50MB limit, unprocessed originals)
+# Source media — never commit raw assets (>50MB limit, unprocessed originals).
+# The raw folders themselves (Video/, PRESS PICS/, SHOW PICS/, PDF ASSETS/) live
+# one level above this repo and are never inside it — only these extension/path
+# guards matter, kept narrow so they can't shadow compressed output in public/.
 *.mov
 *.MOV
 *.ai
 *.AI
 *.docx
-/public/img/brand/symbol-source.png
-/src-media/
 *.psd
-
-# Raw photo/video source dumps (only compressed web output in public/ is tracked)
-**/PRESS PICS/
-**/SHOW PICS/
-**/Video/
-**/PDF ASSETS/source/
+/public/img/brand/symbol-source.png
