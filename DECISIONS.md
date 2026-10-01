@@ -4,6 +4,14 @@ Spontaneous calls made while building, with reasoning, per CLAUDE.md's instructi
 
 ---
 
+## 2026-10-01 — Venue count: shipped 35, not the "34" in TZ §10
+
+**What:** Highlights/Performance section lists 35 venues across 13 countries; TZ §10's acceptance checklist says "34 площадки."
+
+**Why:** `03_CONTENT.md`'s own itemized venue list — the actual source of truth per CLAUDE.md's content-priority rule — totals 35 when counted directly (Saudi 3 + UAE 4 + India 4 + Nepal 1 + Belarus 1 + Turkey 1 + Thailand 2 + Vietnam 5 + Philippines 2 + China 6 + Myanmar 1 + Malaysia 2 + Indonesia 3 = 35). The "34" appears only in that same file's own section heading ("Venues & festivals (34)"), which is a stale label, not a second, conflicting data source. `content.json` was already built from the itemized list, not the heading, so it's correct as shipped — flagging the mismatch for the client rather than silently dropping a real venue to match a miscounted label.
+
+---
+
 ## 2026-10-01 — About's burn-in text contrast: left as-is, not "fixed"
 
 **What:** Lighthouse/axe flags About's paragraph text as failing color-contrast (foreground ~`#211d1c` on `#070404` at rest, ratio 1.22). Not changed.
