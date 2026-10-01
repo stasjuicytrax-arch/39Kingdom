@@ -73,7 +73,12 @@ export function mountPreloader(): void {
   const tearTop = el.querySelector<HTMLElement>('.preloader__tear--top')!;
   const tearBottom = el.querySelector<HTMLElement>('.preloader__tear--bottom')!;
 
-  const split = new SplitText(logo, { type: 'chars' });
+  // aria: 'none' — the plain text is still readable by assistive tech as-is
+  // (it's not removed, just wrapped in spans); GSAP's default 'auto' mode
+  // adds an aria-label to compensate for hiding the split children, but that
+  // label lands on a <h1> here, which has no role to carry it (axe/Lighthouse
+  // flag it as invalid) — this sidesteps the whole mechanism instead.
+  const split = new SplitText(logo, { type: 'chars', aria: 'none' });
   gsap.set(split.chars, { opacity: 0, fontVariationSettings: '"wdth" 125, "wght" 300' });
   gsap.set(symbolWrap, { clipPath: 'inset(0 100% 0 0)' });
 

@@ -31,7 +31,8 @@ export function mountLineup(root: HTMLElement): void {
         ${lineup.posters
           .map(
             (p, i) => `
-          <button type="button" class="lineup__card" data-card data-index="${i}" data-cursor="view" aria-label="View poster: ${p.caption}">
+          <button type="button" class="lineup__card" data-card data-index="${i}" data-cursor="view">
+            <span class="visually-hidden">View poster: </span>
             <span class="lineup__card-tag pill-tag">${p.tag}</span>
             <span class="lineup__card-media">
               <picture>

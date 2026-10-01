@@ -267,12 +267,39 @@
 }
 
 @media (max-width: 767px) {
-  .live__card {
-    width: 220px;
+  .live__stage {
+    padding-block: var(--s-4);
   }
 
-  .live__track {
-    padding-inline: max(var(--grid-margin), calc(50vw - 110px));
+  /* lib/sections/live.ts's mountVerticalSwipe(): native scroll-snap stack,
+     cards swiped vertically instead of the desktop pin+horizontal-scrub. */
+  .live__viewport.is-vertical-swipe {
+    height: 78svh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+    cursor: auto;
+  }
+
+  .live__viewport.is-vertical-swipe .live__track {
+    width: auto;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-6);
+    padding-inline: var(--grid-margin);
+    padding-block: var(--s-6);
+  }
+
+  .live__viewport.is-vertical-swipe .live__card {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    width: min(100%, 300px);
+    cursor: auto;
+  }
+
+  .live__viewport.is-vertical-swipe .live__card-media {
+    max-height: 60svh;
   }
 }
 

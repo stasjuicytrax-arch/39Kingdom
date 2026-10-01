@@ -83,7 +83,9 @@ function mountHeatingText(section: HTMLElement): void {
   const heading = section.querySelector<HTMLElement>('[data-heading]');
   if (!heading || prefersReducedMotion()) return;
 
-  const split = new SplitText(heading, { type: 'chars' });
+  // aria: 'none' — see the matching note in lib/preloader.ts: avoids GSAP
+  // putting an aria-label on `heading`, which has no role to carry it.
+  const split = new SplitText(heading, { type: 'chars', aria: 'none' });
   gsap.set(split.chars, { opacity: 0, yPercent: 40 });
 
   ScrollTrigger.create({

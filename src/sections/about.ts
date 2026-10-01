@@ -5,6 +5,7 @@ import content from '../content.json';
 import { overlineHtml } from '../components/overline';
 import { pillTagHtml } from '../components/buttons';
 import { autoplayInViewport } from '../lib/viewport-video';
+import { lazyPoster } from '../lib/lazy-poster';
 import { tokenColor } from '../lib/color-tokens';
 import { prefersReducedMotion } from '../lib/reduced-motion';
 import { assetUrl } from '../lib/asset-url';
@@ -87,8 +88,8 @@ function headingHtml(tokens: HeadlineToken[], pillVideo: { poster: string; mp4: 
 }
 
 function pillHtml(pillVideo: { poster: string; mp4: string; webm: string }): string {
-  return `<span class="about__pill" data-pill>
-    <video class="about__pill-video" muted loop playsinline preload="none" poster="${assetUrl(pillVideo.poster)}" aria-hidden="true">
+  return `<span class="about__pill" data-pill data-pill-poster="${pillVideo.poster}">
+    <video class="about__pill-video" muted loop playsinline preload="none" aria-hidden="true">
       <source src="${assetUrl(pillVideo.webm)}" type="video/webm" />
       <source src="${assetUrl(pillVideo.mp4)}" type="video/mp4" />
     </video>
@@ -97,7 +98,9 @@ function pillHtml(pillVideo: { poster: string; mp4: string; webm: string }): str
 
 function mountPillVideo(section: HTMLElement): void {
   const video = section.querySelector<HTMLVideoElement>('.about__pill-video');
+  const pill = section.querySelector<HTMLElement>('[data-pill]');
   if (!video) return;
+  if (pill?.dataset.pillPoster) lazyPoster(video, assetUrl(pill.dataset.pillPoster));
   video.load();
   autoplayInViewport(video);
 }
@@ -131,7 +134,9 @@ function mountBurnIn(section: HTMLElement): void {
     // **word** -> <mark class="ember">word</mark>, authored in content.json
     p.innerHTML = p.innerHTML.replace(/\*\*(.+?)\*\*/g, '<mark class="about__ember">$1</mark>');
 
-    const split = new SplitText(p, { type: 'words' });
+    // aria: 'none' — see the matching note in lib/preloader.ts: avoids GSAP
+    // putting an aria-label on this <p>, which has no role to carry it.
+    const split = new SplitText(p, { type: 'words', aria: 'none' });
 
     if (reduced) {
       gsap.set(split.words, {

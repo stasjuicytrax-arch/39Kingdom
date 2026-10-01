@@ -7,7 +7,7 @@ export function mountHeader(): HTMLElement {
   header.className = 'site-header';
   header.innerHTML = `
     <div class="site-header__zone site-header__zone--left">
-      <a href="#hero" class="site-header__logo" data-cursor="link" aria-label="39 KINGDOM — back to top">
+      <a href="#hero" class="site-header__logo" data-cursor="link" aria-label="39KINGDOM — back to top">
         <span class="site-header__logo-mark" aria-hidden="true"></span>
         <span>39KINGDOM</span>
       </a>

@@ -175,7 +175,9 @@ function mountIntroAnimation(section: HTMLElement): void {
     return;
   }
 
-  const split = new SplitText(wordmark, { type: 'chars' });
+  // aria: 'none' — see the matching note in lib/preloader.ts: avoids GSAP
+  // putting an aria-label on this <span>, which has no role to carry it.
+  const split = new SplitText(wordmark, { type: 'chars', aria: 'none' });
   gsap.set(split.chars, { yPercent: 115, fontVariationSettings: '"wdth" 125, "wght" 300' });
 
   const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });

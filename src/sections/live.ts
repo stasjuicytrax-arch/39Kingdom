@@ -4,7 +4,9 @@ import { Flip } from 'gsap/Flip';
 import content from '../content.json';
 import { overlineHtml } from '../components/overline';
 import { autoplayInViewport } from '../lib/viewport-video';
+import { lazyPoster } from '../lib/lazy-poster';
 import { isTouchDevice, prefersReducedMotion } from '../lib/reduced-motion';
+import { isMobileViewport } from '../lib/device-tier';
 import { assetUrl } from '../lib/asset-url';
 
 gsap.registerPlugin(ScrollTrigger, Flip);
@@ -55,7 +57,7 @@ export function mountLive(root: HTMLElement): void {
 
   section.innerHTML = `
     <div class="live__intro" data-intro>
-      <video class="live__intro-video" data-intro-video muted loop playsinline preload="none" poster="${live.localVideos[0] ? assetUrl(live.localVideos[0].poster) : ''}" aria-hidden="true">
+      <video class="live__intro-video" data-intro-video data-poster="${live.localVideos[0]?.poster ?? ''}" muted loop playsinline preload="none" aria-hidden="true">
         <source src="${live.localVideos[0] ? assetUrl(live.localVideos[0].card.webm) : ''}" type="video/webm" />
         <source src="${live.localVideos[0] ? assetUrl(live.localVideos[0].card.mp4) : ''}" type="video/mp4" />
       </video>
@@ -102,11 +104,12 @@ export function mountLive(root: HTMLElement): void {
 function cardHtml(item: DeckItem, i: number): string {
   const isYoutube = item.kind === 'youtube';
   return `
-    <button type="button" class="live__card live__card--${item.kind}" data-card data-index="${i}" data-cursor="play" aria-label="Play: ${item.caption}">
+    <button type="button" class="live__card live__card--${item.kind}" data-card data-index="${i}" data-cursor="play">
+      <span class="visually-hidden">Play: </span>
       <span class="live__card-media">
         ${
           item.kind === 'local' && item.cardVideo
-            ? `<video class="live__card-video" data-card-video muted loop playsinline preload="none" poster="${assetUrl(item.thumb)}">
+            ? `<video class="live__card-video" data-card-video data-poster="${item.thumb}" muted loop playsinline preload="none">
                 <source src="${assetUrl(item.cardVideo.webm)}" type="video/webm" />
                 <source src="${assetUrl(item.cardVideo.mp4)}" type="video/mp4" />
               </video>`
@@ -141,6 +144,8 @@ function mountIntroReveal(section: HTMLElement): void {
   const video = section.querySelector<HTMLVideoElement>('[data-intro-video]');
   const word = section.querySelector<HTMLElement>('.live__intro-word');
   if (!intro || !video || !word) return;
+
+  if (video.dataset.poster) lazyPoster(video, assetUrl(video.dataset.poster));
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="500"><text x="50%" y="52%" text-anchor="middle" dominant-baseline="central" font-family="Arial, sans-serif" font-weight="800" font-size="380" letter-spacing="-16">live.</text></svg>`;
   const maskUrl = `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
@@ -191,6 +196,14 @@ function mountHorizontalScroll(section: HTMLElement, count: number): void {
   if (!stage || !viewport || !track) return;
 
   if (prefersReducedMotion()) return;
+
+  // TZ §8: the scroll-pinned horizontal carousel is a desktop device — on
+  // mobile it becomes a plain vertical swipe-slider through the (mostly
+  // 9:16) cards, no page-scroll hijacking.
+  if (isMobileViewport()) {
+    mountVerticalSwipe(viewport, cards, fill, ticks);
+    return;
+  }
 
   const trackWidth = count * (CARD_WIDTH + CARD_GAP);
   gsap.set(track, { width: trackWidth });
@@ -247,9 +260,43 @@ function mountHorizontalScroll(section: HTMLElement, count: number): void {
   }
 }
 
+/** Mobile fallback for the horizontal pinned carousel: a native vertical
+ * scroll-snap slider (CSS does the swiping; this just keeps the timeline
+ * in sync with whichever card is centered). */
+function mountVerticalSwipe(
+  viewport: HTMLElement,
+  cards: HTMLElement[],
+  fill: HTMLElement | null,
+  ticks: HTMLElement[]
+): void {
+  viewport.classList.add('is-vertical-swipe');
+  if (!cards.length) return;
+
+  function setActive(i: number): void {
+    if (fill) fill.style.transform = `scaleX(${(i + 1) / cards.length})`;
+    ticks.forEach((t, idx) => t.classList.toggle('is-active', idx === i));
+  }
+  setActive(0);
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const i = cards.indexOf(entry.target as HTMLElement);
+        if (i >= 0) setActive(i);
+      }
+    },
+    { root: viewport, threshold: 0.6 }
+  );
+  cards.forEach((card) => io.observe(card));
+}
+
 function mountCardVideos(section: HTMLElement): void {
   const videos = section.querySelectorAll<HTMLVideoElement>('[data-card-video]');
-  videos.forEach((v) => autoplayInViewport(v));
+  videos.forEach((v) => {
+    if (v.dataset.poster) lazyPoster(v, assetUrl(v.dataset.poster));
+    autoplayInViewport(v);
+  });
 }
 
 function mountPlayer(section: HTMLElement, deck: DeckItem[]): void {
