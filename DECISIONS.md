@@ -4,6 +4,30 @@ Spontaneous calls made while building, with reasoning, per CLAUDE.md's instructi
 
 ---
 
+## 2026-10-01 — About's burn-in text contrast: left as-is, not "fixed"
+
+**What:** Lighthouse/axe flags About's paragraph text as failing color-contrast (foreground ~`#211d1c` on `#070404` at rest, ratio 1.22). Not changed.
+
+**Why:** This is the at-rest state of a scroll-scrubbed reveal TZ §02 explicitly specifies — "слова из `--c-ash` 20% → `--c-bone` 100% по мере прокрутки" — so low contrast before the paragraph scrolls into its trigger zone is the intended design, not a bug. axe/Lighthouse only sees a static snapshot and has no concept of scroll-linked animation. Per CLAUDE.md's rule for skill-vs-brief conflicts ("не переделывать молча, а сообщить заказчику"), this is flagged to the client rather than diluted to pass a static check.
+
+---
+
+## 2026-10-01 — Hero heat-haze renders as a decorative overlay, not literal photo/video refraction
+
+**What:** The WebGL heat-haze layer (`lib/webgl-heat-haze.ts`) draws cursor-reactive flame-colored noise + rising sparks on a transparent canvas composited above the hero photo/video, rather than sampling and warping the actual hero pixels.
+
+**Why:** True refraction would mean texturing from whichever of photo/video is currently visible and keeping that texture in sync frame-to-frame (video texture uploads are themselves a real cost) — expensive exactly where TZ §8 says to be conservative (weak devices/mobile fall back to CSS). An additive shimmer overlay reads as the same "heat over fire" effect, costs a lot less, and composites correctly over both the static photo and the video once it loads, without needing to know which is currently on top.
+
+---
+
+## 2026-10-01 — Live section: vertical swipe replaces the pin-scrub carousel on mobile, not just a resized version of it
+
+**What:** TZ §8 ("Live на мобиле → вертикальный свайп-слайдер") is implemented as a full mode switch (`mountVerticalSwipe()`): native CSS scroll-snap, no `pin`/`scrub`, no page-scroll hijacking — not the desktop carousel with smaller cards.
+
+**Why:** The desktop mechanic works by translating the track horizontally as the user scrolls the *page* vertically — on a touch device that means a vertical swipe gesture doesn't do what it looks like it should (swipe the cards), it scrolls the page, which then drives the carousel indirectly. That's the exact failure TZ is calling out. A plain resize wouldn't have fixed it; the interaction model itself had to change.
+
+---
+
 ## 2026-09-30 — Highlights section layout: h1 title stays inside the sticky column, not full-bleed above it
 
 **What:** Fixed the PERFORMANCE HIGHLIGHTS heading overlapping the venue list at ~960px by making its font-size respond to the sticky column's own width (via a column-relative clamp) instead of the page-wide `--fs-h1` token, and hardening the grid so the sticky column can never grow past its track.
