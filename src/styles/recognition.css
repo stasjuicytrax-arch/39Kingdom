@@ -93,6 +93,7 @@
 }
 
 .recognition__frame {
+  position: relative;
   margin: 0;
   border-radius: var(--r-card);
   overflow: hidden;
@@ -104,11 +105,28 @@
   height: 100%;
   object-fit: cover;
   filter: grayscale(1) contrast(1.15);
-  transition: transform var(--dur-slow) var(--ease-soft);
+  transition: transform var(--dur-slow) var(--ease-soft), filter var(--dur-slow) var(--ease-soft);
 }
 
 .recognition__frame:hover img {
   transform: scale(1.05);
+  filter: grayscale(0) contrast(1.05);
+}
+
+/* Sits over the <img> only while the one-shot RGB-shift reveal plays
+   (lib/webgl-rgb-shift.ts toggles .is-active); hidden/inert otherwise so
+   the plain photo + CSS hover-color above are what's actually interactive. */
+.recognition__frame-fx {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.recognition__frame-fx.is-active {
+  opacity: 1;
 }
 
 .recognition__preview {

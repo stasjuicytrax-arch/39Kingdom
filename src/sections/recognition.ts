@@ -4,6 +4,7 @@ import content from '../content.json';
 import { overlineHtml } from '../components/overline';
 import { isTouchDevice, prefersReducedMotion } from '../lib/reduced-motion';
 import { assetUrl } from '../lib/asset-url';
+import { afterLoad, shouldUseWebGL } from '../lib/webgl-gate';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -56,12 +57,13 @@ export function mountRecognition(root: HTMLElement): void {
       ${rec.triptych
         .map(
           (slug) => `
-        <figure class="recognition__frame">
+        <figure class="recognition__frame" data-rgb-frame>
           <picture>
             <source type="image/avif" srcset="${assetUrl(`/img/recognition/${slug}-1280.avif`)}" />
             <source type="image/webp" srcset="${assetUrl(`/img/recognition/${slug}-1280.webp`)}" />
-            <img src="${assetUrl(`/img/recognition/${slug}-1280.jpg`)}" alt="39 KINGDOM with international artists" loading="lazy" decoding="async" />
+            <img data-rgb-img src="${assetUrl(`/img/recognition/${slug}-1280.jpg`)}" alt="39 KINGDOM with international artists" loading="lazy" decoding="async" />
           </picture>
+          <canvas class="recognition__frame-fx" data-rgb-canvas aria-hidden="true"></canvas>
         </figure>`
         )
         .join('')}
@@ -76,6 +78,36 @@ export function mountRecognition(root: HTMLElement): void {
   root.appendChild(section);
 
   mountNameHover(section);
+  mountTriptychReveal(section);
+}
+
+/** Plays the RGB-shift reveal once per triptych photo, the first time it
+ * enters the viewport. Deferred past `load` and gated on device/motion
+ * capability; off devices just keep the plain (eventual hover-color) photo. */
+function mountTriptychReveal(section: HTMLElement): void {
+  const frames = section.querySelectorAll<HTMLElement>('[data-rgb-frame]');
+  if (!frames.length) return;
+
+  afterLoad(() => {
+    if (!shouldUseWebGL()) return;
+
+    import('../lib/webgl-rgb-shift').then(({ playRgbShiftReveal }) => {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            const frame = entry.target as HTMLElement;
+            const canvas = frame.querySelector<HTMLCanvasElement>('[data-rgb-canvas]');
+            const img = frame.querySelector<HTMLImageElement>('[data-rgb-img]');
+            if (canvas && img) playRgbShiftReveal(canvas, img);
+            io.unobserve(frame);
+          }
+        },
+        { threshold: 0.3 }
+      );
+      frames.forEach((frame) => io.observe(frame));
+    });
+  });
 }
 
 function splitIntoRows<T>(items: T[], rowCount: number): T[][] {

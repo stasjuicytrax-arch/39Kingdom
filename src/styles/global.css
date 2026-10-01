@@ -3,6 +3,7 @@
 @import '@fontsource/jetbrains-mono/500.css';
 @import './tokens.css';
 @import './grid.css';
+@import './preloader.css';
 @import './overline.css';
 @import './buttons.css';
 @import './header.css';
@@ -67,8 +68,10 @@ video {
   min-height: 100svh;
 }
 
-/* Prevent background scroll bleed while the full-screen menu is open. */
-body.menu-open {
+/* Prevent background scroll bleed while the full-screen menu, a lightbox/
+   player overlay, or the preloader is open/active. */
+body.menu-open,
+body.preloader-active {
   overflow: hidden;
 }
 

@@ -41,6 +41,54 @@
   pointer-events: none;
 }
 
+/* Simplified CSS stand-in for the WebGL heat-haze — mobile/low-power/
+   reduced-motion per TZ §8. No cursor reactivity, just an ambient
+   ember wash and a handful of rising sparks. */
+.hero__fx-css {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.hero__fx-css.is-active {
+  opacity: 1;
+}
+
+.hero__fx-css::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 45% at 50% 100%, rgba(245, 161, 36, 0.28) 0%, rgba(229, 82, 12, 0.12) 45%, transparent 75%);
+  animation: hero-haze-breathe 6400ms ease-in-out infinite alternate;
+}
+
+.hero__spark {
+  position: absolute;
+  left: calc(50% + (var(--i) - 3) * 9%);
+  bottom: -4%;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--c-flare);
+  box-shadow: 0 0 6px 1px var(--c-ember);
+  opacity: 0;
+  animation: hero-spark-rise calc(4800ms + var(--i) * 540ms) ease-in calc(var(--i) * -700ms) infinite;
+}
+
+@keyframes hero-haze-breathe {
+  from { opacity: 0.7; transform: translateY(0); }
+  to { opacity: 1; transform: translateY(-2%); }
+}
+
+@keyframes hero-spark-rise {
+  0% { opacity: 0; transform: translate(0, 0); }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.4; }
+  100% { opacity: 0; transform: translate(calc((var(--i) - 3) * 4px), -82svh); }
+}
+
 .hero__scrim {
   position: absolute;
   inset: 0;
@@ -258,5 +306,15 @@
 @media (prefers-reduced-motion: reduce) {
   .hero__scroll-cue {
     animation: none;
+  }
+
+  .hero__fx-css.is-active {
+    opacity: 0.5;
+  }
+
+  .hero__fx-css::before,
+  .hero__spark {
+    animation: none;
+    opacity: 0;
   }
 }

@@ -1,6 +1,7 @@
 import './styles/global.css';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import { mountPreloader } from './lib/preloader';
 import { mountGrain } from './lib/grain';
 import { initSmoothScroll } from './lib/smooth-scroll';
 import { mountHeader, observeSections } from './lib/header';
@@ -36,6 +37,10 @@ const BUILT_SECTIONS = new Set([
 ]);
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
+
+// First thing on the page — everything else mounts underneath it and is
+// simply occluded until it tears open (see lib/preloader.ts).
+mountPreloader();
 
 // Global chrome — header/menu/cursor/grain/scroll-progress sit outside #app
 // (fixed overlays). Header mounts first so its logo exists as the hero

@@ -7,6 +7,8 @@ import { pillOrbHtml, outlineButtonHtml } from '../components/buttons';
 import { getNextShow, formatShortDate, cityTimeZone } from '../lib/tour-helpers';
 import { prefersReducedMotion } from '../lib/reduced-motion';
 import { assetUrl } from '../lib/asset-url';
+import { onPreloaderComplete } from '../lib/preloader';
+import { afterLoad, shouldUseWebGL } from '../lib/webgl-gate';
 
 gsap.registerPlugin(ScrollTrigger, SplitText, Flip);
 
@@ -37,6 +39,9 @@ export function mountHero(root: HTMLElement): void {
       </picture>
       <video class="hero__video" muted loop playsinline preload="none" poster="${assetUrl('/img/hero/hero-main-1280.jpg')}" aria-hidden="true"></video>
       <canvas class="hero__fx" aria-hidden="true" data-hero-fx></canvas>
+      <div class="hero__fx-css" aria-hidden="true" data-hero-fx-css>
+        ${Array.from({ length: 7 }, (_, i) => `<span class="hero__spark" style="--i: ${i};"></span>`).join('')}
+      </div>
       <div class="hero__scrim" aria-hidden="true"></div>
       <div class="hero__darken" aria-hidden="true"></div>
       <div class="hero__frame" aria-hidden="true"></div>
@@ -90,8 +95,33 @@ export function mountHero(root: HTMLElement): void {
 
   if (tz) mountLocalClock(section, tz);
   mountMobileVideo(section);
-  mountIntroAnimation(section);
+  // Waits for the preloader's tear-open (or fires immediately if the
+  // preloader didn't run this visit) so the char-reveal isn't wasted while
+  // still hidden behind it.
+  onPreloaderComplete(() => mountIntroAnimation(section));
   mountScrollAnimations(section);
+  mountHeroFx(section);
+}
+
+/** Heat-haze + sparks: deferred past `load` and gated on device/motion
+ * capability (TZ §8). WebGL path is code-split via dynamic import so OGL
+ * never sits on the critical path; everything else falls back to the
+ * pre-rendered CSS sparks sitting dormant in the markup above. */
+function mountHeroFx(section: HTMLElement): void {
+  const canvas = section.querySelector<HTMLCanvasElement>('[data-hero-fx]');
+  const cssFx = section.querySelector<HTMLElement>('[data-hero-fx-css]');
+  if (!canvas) return;
+
+  afterLoad(() => {
+    if (shouldUseWebGL()) {
+      import('../lib/webgl-heat-haze').then(({ mountHeatHaze }) => {
+        const teardown = mountHeatHaze(canvas, section);
+        if (!teardown) cssFx?.classList.add('is-active'); // WebGL init failed at runtime
+      });
+    } else {
+      cssFx?.classList.add('is-active');
+    }
+  });
 }
 
 function srcset(section: string, slug: string, ext: string): string {
