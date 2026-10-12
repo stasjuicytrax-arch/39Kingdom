@@ -18,9 +18,8 @@ export function mountContact(root: HTMLElement): void {
   section.setAttribute('aria-label', 'Contact');
 
   section.innerHTML = `
-    <img class="contact__symbol" src="${assetUrl('/img/brand/symbol-180.png')}" alt="" aria-hidden="true" width="90" height="90" />
-
     <div class="container contact__inner">
+      <img class="contact__symbol" src="${assetUrl('/img/brand/symbol-180.png')}" alt="" aria-hidden="true" width="64" height="64" />
       <h2 class="contact__heading" data-heading>${contact.heading}</h2>
       <p class="contact__subheading">${contact.subheading}</p>
 
@@ -90,7 +89,7 @@ function mountHeatingText(section: HTMLElement): void {
 
   ScrollTrigger.create({
     trigger: section, // fires as soon as Contact enters the screen: never an empty first view
-    start: 'top 95%',
+    start: 'top 100%',
     once: true,
     onEnter: () =>
       gsap.to(split.chars, { opacity: 1, yPercent: 0, duration: 0.8, stagger: 0.025, ease: 'power3.out' }),

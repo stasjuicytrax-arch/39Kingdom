@@ -23,25 +23,6 @@
   z-index: 3;
 }
 
-.lineup__bg {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--ff-display);
-  font-variation-settings: var(--v-giant);
-  font-size: var(--fs-giant);
-  line-height: 1;
-  letter-spacing: var(--ls-giant);
-  text-transform: lowercase;
-  color: var(--c-smoke);
-  pointer-events: none;
-  z-index: 0;
-  user-select: none;
-  white-space: nowrap;
-}
-
 .lineup__head {
   position: relative;
   z-index: 2;

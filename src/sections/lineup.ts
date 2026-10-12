@@ -19,7 +19,6 @@ export function mountLineup(root: HTMLElement): void {
   section.setAttribute('aria-label', lineup.title);
 
   section.innerHTML = `
-    <div class="lineup__bg" aria-hidden="true">LINE-UP</div>
     <div class="container lineup__head">
       ${overlineHtml(4)}
       <h2 class="lineup__title">${lineup.title}</h2>

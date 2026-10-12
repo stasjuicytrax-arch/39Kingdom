@@ -34,9 +34,24 @@
   pointer-events: none;
 }
 
+/* title + strip + timeline = one block, centred in the pinned screen */
+.live__pin {
+  --live-card-w: clamp(220px, calc((100svh - 340px) * 9 / 16), 360px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(24px, 3vw, 48px);
+  padding-block: clamp(48px, 6vw, 80px);
+}
+
+@media (min-width: 768px) {
+  .live__pin {
+    min-height: 100svh;
+  }
+}
+
 .live__head {
-  padding-top: clamp(48px, 6vw, 96px);
-  padding-bottom: var(--s-5);
+  padding: 0;
 }
 
 .live__title {
@@ -110,14 +125,14 @@
 .live__track {
   display: flex;
   gap: 28px;
-  padding-inline: max(var(--grid-margin), calc(50vw - 140px));
+  padding-inline: max(var(--grid-margin), calc(50vw - var(--live-card-w, 280px) / 2));
   will-change: transform;
 }
 
 .live__card {
   position: relative;
   flex: none;
-  width: 280px;
+  width: var(--live-card-w, 280px);
   display: flex;
   flex-direction: column;
   gap: var(--s-3);
@@ -140,9 +155,9 @@
 }
 
 /* one frame for every card: 9:16 clips and 16:9 YouTube thumbs are both
-   cover-cropped into 4:5 */
+   cover-cropped into 9:16 */
 .live__card-media {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 9 / 16;
 }
 
 .live__card--youtube .live__card-media img {
@@ -353,7 +368,7 @@
   .live__viewport.is-vertical-swipe .live__card {
     scroll-snap-align: center;
     scroll-snap-stop: always;
-    width: min(100%, 300px);
+    width: min(100%, 300px, calc(56svh * 9 / 16));
     cursor: auto;
   }
 

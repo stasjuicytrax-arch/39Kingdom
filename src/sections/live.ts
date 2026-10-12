@@ -12,7 +12,6 @@ import { getLenis } from '../lib/smooth-scroll';
 
 gsap.registerPlugin(ScrollTrigger, Flip);
 
-const CARD_WIDTH = 280;
 const CARD_GAP = 28;
 
 interface DeckItem {
@@ -65,6 +64,7 @@ export function mountLive(root: HTMLElement): void {
       <p class="live__intro-word" aria-hidden="true">live.</p>
     </div>
 
+    <div class="live__pin" data-pin>
     <div class="container live__head">
       ${overlineHtml(6)}
       <h2 class="live__title">${live.title}</h2>
@@ -88,6 +88,8 @@ export function mountLive(root: HTMLElement): void {
           ${deck.map((d, i) => `<button type="button" data-timeline-tick="${i}" data-cursor="link" aria-label="Go to ${d.caption}">${String(i + 1).padStart(2, '0')}</button>`).join('')}
         </div>
       </div>
+    </div>
+
     </div>
 
     <p class="live__footnote container">${live.footnote}</p>
@@ -210,8 +212,9 @@ function mountHorizontalScroll(section: HTMLElement, count: number): void {
     return;
   }
 
-  const trackWidth = count * (CARD_WIDTH + CARD_GAP);
-  gsap.set(track, { width: trackWidth });
+  // card width is fluid (CSS --live-card-w, scales with viewport height)
+  const getTrackWidth = () => count * ((cards[0]?.offsetWidth ?? 280) + CARD_GAP);
+  gsap.set(track, { width: getTrackWidth() });
 
   function tiltCards(): void {
     // Read all rects before writing any transform — see the matching note
@@ -226,16 +229,21 @@ function mountHorizontalScroll(section: HTMLElement, count: number): void {
     });
   }
 
-  const scrollDistance = Math.max(trackWidth - viewport.clientWidth, 400);
+  const getDistance = () => Math.max(getTrackWidth() - viewport.clientWidth, 400);
+  const pinEl = section.querySelector<HTMLElement>('[data-pin]') ?? stage;
 
   const trigger = ScrollTrigger.create({
-    trigger: section,
+    trigger: pinEl,
     start: 'top top',
-    end: () => `+=${scrollDistance}`,
-    pin: stage,
+    end: () => `+=${getDistance()}`,
+    pin: pinEl,
     scrub: 1,
+    invalidateOnRefresh: true,
+    onRefresh: () => {
+      gsap.set(track, { width: getTrackWidth() });
+    },
     onUpdate: (self) => {
-      gsap.set(track, { x: -self.progress * scrollDistance });
+      gsap.set(track, { x: -self.progress * getDistance() });
       tiltCards();
       if (fill) fill.style.transform = `scaleX(${self.progress})`;
       const activeIndex = Math.min(count - 1, Math.floor(self.progress * count));
@@ -261,7 +269,7 @@ function mountHorizontalScroll(section: HTMLElement, count: number): void {
   const nearestIndex = () => Math.round(((window.scrollY - minY()) / span()) * lastIndex);
   const goToIndex = (i: number) => goTo(minY() + (Math.min(lastIndex, Math.max(0, i)) / lastIndex) * span());
   // pointer px -> page-scroll px, so 1px of drag moves the strip ~1px
-  const dragRatio = () => span() / Math.max(1, trackWidth - viewport.clientWidth);
+  const dragRatio = () => span() / Math.max(1, getTrackWidth() - viewport.clientWidth);
 
   section.querySelectorAll<HTMLElement>('[data-nav]').forEach((btn) => {
     btn.addEventListener('click', () => goToIndex(nearestIndex() + Number(btn.dataset.nav)));

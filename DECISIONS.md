@@ -70,3 +70,5 @@ Spontaneous calls made while building, with reasoning, per CLAUDE.md's instructi
 - Рваный край Line-up→Tour убран полностью (по решению заказчика): стык = скрим Line-up в void (clamp(96px,10vw,160px)) + линия 1px smoke + ember-glow ≤0.22 за заголовком ON TOUR. Светлые декоративные полосы остались только в Music (намеренно).
 - Карта мира в Highlights: dotted-маска суши генерится scripts/worldmap.mjs (world-atlas 110m) в src/lib/world-dots.json, подгружается lazy-чанком (3.6 KB gzip) при приближении колонки; скрыта на <768px. Города подсвечиваются со stagger, пульс только после входа в экран.
 - Perf: зерно статично на мобиле (постоянная перерисовка 10fps держала Speed Index), hero-loop видео стартует после load, отдельный 35KB постер для pill-видео (было 379KB).
+- Contact «пустой экран»: корень — `background-clip:text` на родителе + SplitText (трансформированные дети не клипались, THANK YOU был невидим). Градиент перенесён на буквы; символ внутри .contact__inner, высота по содержимому.
+- Live: заголовок+лента+таймлайн — один pin-блок `.live__pin` по центру экрана; карточки 9:16, ширина `--live-card-w` от высоты окна. Line-up: фоновое слово удалено.

@@ -1,6 +1,6 @@
 .site-footer {
   border-top: 1px solid var(--c-line);
-  padding-block: var(--s-9);
+  padding-block: var(--s-7) var(--s-9);
   background: var(--c-void);
 }
 

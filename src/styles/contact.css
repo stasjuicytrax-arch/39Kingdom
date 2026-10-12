@@ -1,13 +1,7 @@
 .contact {
   position: relative;
-  min-height: 85svh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--s-5);
   text-align: center;
-  padding-block: clamp(64px, 8vw, 128px);
+  padding-block: clamp(32px, 3vw, 48px) clamp(48px, 5vw, 80px);
   background: var(--g-heat);
   overflow: hidden;
 }
@@ -16,7 +10,7 @@
   position: relative;
   z-index: 1;
   flex: none;
-  width: clamp(96px, 10vw, 160px);
+  width: clamp(48px, 5vw, 72px);
   height: auto;
   opacity: 0.85;
   animation: contact-pulse var(--beat) ease-in-out infinite alternate;
@@ -49,10 +43,20 @@
   line-height: var(--lh-condensed);
   letter-spacing: var(--ls-giant);
   text-transform: uppercase;
+  /* readable even before JS splits it into letters */
+  color: var(--c-bone);
+}
+
+/* The gradient lives on each SplitText letter: background-clip:text on the
+   parent drops transformed children (the heading rendered invisible). */
+.contact__heading > div,
+.contact__heading > span {
   background: var(--g-pyro);
-  background-size: 200% 100%;
+  background-size: 300% 100%;
+  white-space: pre; /* keep the word space between THANK and YOU */
   -webkit-background-clip: text;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: transparent;
   animation: contact-heat 6s ease-in-out infinite;
 }
@@ -127,7 +131,8 @@
     animation: none;
   }
 
-  .contact__heading {
+  .contact__heading > div,
+  .contact__heading > span {
     animation: none;
     background-position: 50% 50%;
   }

@@ -8,7 +8,8 @@
 }
 
 .social__handle {
-  margin: var(--s-2) 0;
+  margin: var(--s-2) 0 0;
+  padding-bottom: clamp(24px, 3vw, 48px); /* clears the "@" descender */
   font-family: var(--ff-display);
   font-variation-settings: var(--v-condensed);
   font-size: var(--fs-h1);
