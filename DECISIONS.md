@@ -57,3 +57,8 @@ Spontaneous calls made while building, with reasoning, per CLAUDE.md's instructi
 **What:** `PRESS RELEASE 2026.docx` → converted to PDF; `39 KINGDOM - Press Kit 2026.pdf` (16MB) → compressed for web download. Both placed in `site/public/downloads/` and wired into `content.json`'s `contact.downloads`.
 
 **Why:** These aren't client-dependent — the source files already exist in the project folder (`BIO/LOGO - BIO/PRESS RELEASE 2026.docx`, `39 KINGDOM - Press Kit 2026.pdf`), TZ §6 explicitly calls for this exact conversion/compression, and leaving the Contact section's download buttons dead would ship a visibly broken feature. Distinguished from genuinely client-blocked items (streaming links, real tour data) which stay as `data-todo="link"` placeholders per the instruction above.
+
+## Stage G (PDF) + font fix
+- Шрифт: токены ссылались на "Archivo", а пакет регистрирует "Archivo Variable" (и без оси wdth в index.css) → сайт рендерился системным шрифтом. Подключён `archivo/wdth.css`, токены → "Archivo Variable".
+- PDF: `print.html` + `src/print.ts` (клиентский рендер из content.json, QR через `qrcode`), `npm run pdf` = build → vite preview → headless Edge. 10 слайдов, ~5.7 MB. Старый Canva-PDF заменён тем же путём `/downloads/39-kingdom-press-kit-2026.pdf`.
+- Локальной копии awesome-design-md (Runway/ElevenLabs) в проекте нет — доноры не открывались; приёмы берём из DESIGN.md проекта.

@@ -38,8 +38,8 @@
   --glass-blur: blur(18px) saturate(140%);
 
   /* ---------- Type ---------- */
-  --ff-display: "Archivo", "Arial Narrow", sans-serif;
-  --ff-body:    "Archivo", system-ui, sans-serif;
+  --ff-display: "Archivo Variable", "Archivo", "Arial Narrow", sans-serif;
+  --ff-body:    "Archivo Variable", "Archivo", system-ui, sans-serif;
   --ff-mono:    "JetBrains Mono", ui-monospace, monospace;
 
   --fs-giant: clamp(96px, 22vw, 420px);
