@@ -8,7 +8,8 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--s-4);
-  padding: var(--s-4) var(--grid-margin);
+  /* right side reserved for the fixed .menu-toggle (~90px wide) */
+  padding: var(--s-4) calc(var(--grid-margin) + 108px) var(--s-4) var(--grid-margin);
   font-family: var(--ff-mono);
   font-size: var(--fs-meta);
   letter-spacing: var(--ls-meta);
@@ -67,6 +68,8 @@
 
 .site-header__zone--right {
   justify-content: flex-end;
+  gap: var(--s-4);
+  min-height: 44px; /* align with menu toggle */
 }
 
 .site-header__book {

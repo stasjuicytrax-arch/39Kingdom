@@ -172,7 +172,7 @@ function mountPortraitReveal(section: HTMLElement): void {
   });
 
   gsap.to(img, {
-    yPercent: -15,
+    yPercent: -4.5, // img is 110% tall: bottom edge stays covered, top never drops below the frame
     ease: 'none',
     scrollTrigger: { trigger: figure, start: 'top bottom', end: 'bottom top', scrub: true },
   });

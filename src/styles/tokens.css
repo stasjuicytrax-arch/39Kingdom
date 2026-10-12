@@ -70,7 +70,7 @@
   --s-1: 4px;  --s-2: 8px;   --s-3: 12px;  --s-4: 16px;
   --s-5: 24px; --s-6: 32px;  --s-7: 48px;  --s-8: 64px;
   --s-9: 96px; --s-10: 128px; --s-11: 192px; --s-12: 256px;
-  --section-gap: clamp(128px, 16vw, 256px);
+  --section-gap: clamp(48px, 5vw, 80px); /* per side: two adjacent sections give a pause of clamp(96px, 10vw, 160px) */
 
   /* ---------- Grid ---------- */
   --grid-cols: 12;

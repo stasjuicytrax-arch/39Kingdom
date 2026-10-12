@@ -62,3 +62,6 @@ Spontaneous calls made while building, with reasoning, per CLAUDE.md's instructi
 - Шрифт: токены ссылались на "Archivo", а пакет регистрирует "Archivo Variable" (и без оси wdth в index.css) → сайт рендерился системным шрифтом. Подключён `archivo/wdth.css`, токены → "Archivo Variable".
 - PDF: `print.html` + `src/print.ts` (клиентский рендер из content.json, QR через `qrcode`), `npm run pdf` = build → vite preview → headless Edge. 10 слайдов, ~5.7 MB. Старый Canva-PDF заменён тем же путём `/downloads/39-kingdom-press-kit-2026.pdf`.
 - Локальной копии awesome-design-md (Runway/ElevenLabs) в проекте нет — доноры не открывались; приёмы берём из DESIGN.md проекта.
+- Паузы между секциями: `--section-gap` теперь «на сторону» clamp(48px, 5vw, 80px) → стык двух секций = clamp(96px, 10vw, 160px) (раньше 2×256px). Hero-внутренний padding не трогали.
+- About-портрет: object-position top, img 110% высоты, параллакс -4.5% (голова не уходит за кадр); на ≤1279px кадр 4/5 вместо 16/10.
+- Header: справа зарезервировано 108px под фиксированную кнопку MENU.
