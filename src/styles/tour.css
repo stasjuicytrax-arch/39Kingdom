@@ -4,16 +4,18 @@
 }
 
 .tour__tear {
+  /* torn-paper edge from the tour poster: bone strip on top, ragged lower edge
+     catching ember light; the dark tour section is the "torn" side */
   position: absolute;
-  top: -1px;
+  top: 0;
   left: 0;
   right: 0;
-  height: 48px;
-  background: var(--c-night);
+  height: clamp(20px, 2.4vw, 36px);
+  background: linear-gradient(180deg, var(--c-bone) 0%, var(--c-bone) 55%, var(--c-ember) 100%);
   clip-path: polygon(
-    0% 100%, 3% 20%, 7% 60%, 12% 10%, 18% 70%, 24% 15%, 30% 55%, 36% 5%,
-    42% 65%, 48% 20%, 54% 75%, 60% 10%, 66% 50%, 72% 0%, 78% 60%, 84% 15%,
-    90% 70%, 96% 25%, 100% 100%
+    0% 0%, 100% 0%, 100% 55%, 97% 85%, 93% 45%, 88% 100%, 83% 60%, 78% 90%, 72% 40%,
+    66% 80%, 61% 50%, 55% 100%, 49% 55%, 44% 85%, 38% 35%, 33% 90%, 27% 50%, 21% 95%,
+    16% 45%, 10% 80%, 5% 40%, 0% 70%
   );
   z-index: 1;
 }

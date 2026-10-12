@@ -8,7 +8,6 @@ import { assetUrl } from '../lib/asset-url';
 
 gsap.registerPlugin(ScrollTrigger, Flip);
 
-const CARD_WIDTH = 320; // px, matches --lineup-card-w below
 const CARD_GAP = 32;
 
 export function mountLineup(root: HTMLElement): void {
@@ -68,7 +67,8 @@ function mountCarousel(section: HTMLElement, count: number): void {
   const cards = Array.from(section.querySelectorAll<HTMLElement>('[data-card]'));
   if (!viewport || !track) return;
 
-  const trackWidth = count * (CARD_WIDTH + CARD_GAP);
+  // Card width is fluid (CSS --lineup-card-w, scales with viewport height).
+  const getTrackWidth = () => count * ((cards[0]?.offsetWidth ?? 320) + CARD_GAP);
   const reduced = prefersReducedMotion();
 
   function styleCards(): void {
@@ -99,18 +99,19 @@ function mountCarousel(section: HTMLElement, count: number): void {
     return;
   }
 
-  gsap.set(track, { width: trackWidth });
-
-  const scrollDistance = Math.max(trackWidth - viewport.clientWidth, 400);
+  const getDistance = () => Math.max(getTrackWidth() - viewport.clientWidth, 400);
+  gsap.set(track, { width: getTrackWidth() });
 
   const trigger = ScrollTrigger.create({
     trigger: section,
     start: 'top top',
-    end: () => `+=${scrollDistance}`,
+    end: () => `+=${getDistance()}`,
+    invalidateOnRefresh: true,
+    onRefresh: () => { gsap.set(track, { width: getTrackWidth() }); },
     pin: true,
     scrub: 1,
     onUpdate: (self) => {
-      gsap.set(track, { x: -self.progress * scrollDistance });
+      gsap.set(track, { x: -self.progress * getDistance() });
       styleCards();
     },
   });
