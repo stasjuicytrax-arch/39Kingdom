@@ -33,6 +33,7 @@ export function mountHighlights(root: HTMLElement): void {
             .join('')}
         </div>
         <p class="highlights__lead">${h.lead}</p>
+        <div class="highlights__map" data-map></div>
       </div>
 
       <div class="highlights__list-wrap">
@@ -66,6 +67,41 @@ export function mountHighlights(root: HTMLElement): void {
   mountCounters(section);
   mountMarquee(section);
   mountRowPreview(section);
+  mountMap(section);
+}
+
+/** Dotted tour map: dots + city data live in a lazy chunk, fetched only once
+ * the sticky column is near the viewport, then the cities light up in turn. */
+function mountMap(section: HTMLElement): void {
+  const host = section.querySelector<HTMLElement>('[data-map]');
+  if (!host || window.matchMedia('(max-width: 767px)').matches) return;
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      io.disconnect();
+      import('../lib/world-map').then(({ worldMapHtml }) => {
+        host.innerHTML = worldMapHtml();
+        const svg = host.querySelector<SVGElement>('[data-wmap]');
+        if (!svg) return;
+        if (prefersReducedMotion()) {
+          svg.classList.add('is-lit');
+          return;
+        }
+        const lit = new IntersectionObserver(
+          (es) => {
+            if (!es.some((e) => e.isIntersecting)) return;
+            lit.disconnect();
+            svg.classList.add('is-lit');
+          },
+          { threshold: 0.4 }
+        );
+        lit.observe(svg);
+      });
+    },
+    { rootMargin: '500px 0px' }
+  );
+  io.observe(host);
 }
 
 function marqueeHtml(cities: string[]): string {

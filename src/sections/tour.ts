@@ -27,7 +27,6 @@ export function mountTour(root: HTMLElement): void {
   section.setAttribute('aria-label', tour.title);
 
   section.innerHTML = `
-    <div class="tour__tear" aria-hidden="true"></div>
     <div class="container">
       ${overlineHtml(5)}
       <div class="tour__head">

@@ -3,20 +3,32 @@
   padding-block: var(--section-gap);
 }
 
-.tour__tear {
-  /* torn-paper edge from the tour poster: bone strip on top, ragged lower edge
-     catching ember light; the dark tour section is the "torn" side */
+/* Clean seam from Line-up: a hairline on top and a barely-there ember glow
+   behind the ON TOUR title. (Line-up fades to black on its own side.) */
+.tour::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--grid-margin);
+  right: var(--grid-margin);
+  height: 1px;
+  background: var(--c-smoke);
+}
+
+.tour::after {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  height: clamp(20px, 2.4vw, 36px);
-  background: linear-gradient(180deg, var(--c-bone) 0%, var(--c-bone) 55%, var(--c-ember) 100%);
-  clip-path: polygon(
-    0% 0%, 100% 0%, 100% 55%, 97% 85%, 93% 45%, 88% 100%, 83% 60%, 78% 90%, 72% 40%,
-    66% 80%, 61% 50%, 55% 100%, 49% 55%, 44% 85%, 38% 35%, 33% 90%, 27% 50%, 21% 95%,
-    16% 45%, 10% 80%, 5% 40%, 0% 70%
-  );
+  width: min(70%, 1000px);
+  height: 480px;
+  background: radial-gradient(60% 70% at 25% 35%, rgba(229, 82, 12, 0.22), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tour > .container {
+  position: relative;
   z-index: 1;
 }
 

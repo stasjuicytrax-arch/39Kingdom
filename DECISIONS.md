@@ -67,3 +67,6 @@ Spontaneous calls made while building, with reasoning, per CLAUDE.md's instructi
 - Header: справа зарезервировано 108px под фиксированную кнопку MENU.
 - Recognition триптих: источники bw-2 (834px) и bw-3 (902px) мельче 1280, images.mjs не апскейлит → файлов -1280 нет (404). В content.json у триптиха теперь `maxWidth` и уникальный `alt`; код берёт min(1280, maxWidth).
 - Live: все карточки 4:5; pinned-scrub остаётся основным режимом, drag/wheel/стрелки/клавиши/клик по таймлайну только двигают window scroll (через Lenis) — без второго источника истины.
+- Рваный край Line-up→Tour убран полностью (по решению заказчика): стык = скрим Line-up в void (clamp(96px,10vw,160px)) + линия 1px smoke + ember-glow ≤0.22 за заголовком ON TOUR. Светлые декоративные полосы остались только в Music (намеренно).
+- Карта мира в Highlights: dotted-маска суши генерится scripts/worldmap.mjs (world-atlas 110m) в src/lib/world-dots.json, подгружается lazy-чанком (3.6 KB gzip) при приближении колонки; скрыта на <768px. Города подсвечиваются со stagger, пульс только после входа в экран.
+- Perf: зерно статично на мобиле (постоянная перерисовка 10fps держала Speed Index), hero-loop видео стартует после load, отдельный 35KB постер для pill-видео (было 379KB).

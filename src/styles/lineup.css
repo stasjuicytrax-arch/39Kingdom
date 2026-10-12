@@ -10,6 +10,19 @@
   isolation: isolate;
 }
 
+/* fades the section into the black of the next one */
+.lineup::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(96px, 10vw, 160px);
+  background: linear-gradient(180deg, transparent, var(--c-void));
+  pointer-events: none;
+  z-index: 3;
+}
+
 .lineup__bg {
   position: absolute;
   inset: 0;

@@ -14,7 +14,7 @@
      own column-scoped font-size above. */
   min-width: 0;
   position: sticky;
-  top: calc(var(--s-9) + 40px);
+  top: var(--s-9);
   display: flex;
   flex-direction: column;
   gap: var(--s-6);
@@ -259,5 +259,79 @@
   .highlights__row-venue,
   .highlights__row-city {
     transition: none;
+  }
+}
+
+/* ---------- Dotted tour map ---------- */
+.highlights__map {
+  margin-top: calc(var(--s-4) * -1);
+}
+
+.wmap {
+  display: block;
+  width: 100%;
+  max-height: 18svh;
+}
+
+.wmap__land {
+  fill: none;
+  stroke: #3a302e;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+.wmap__dot {
+  fill: var(--c-ember);
+  opacity: 0;
+  transform: scale(0.2);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 400ms var(--ease-out-expo), transform 600ms var(--ease-out-expo);
+  transition-delay: calc(var(--i) * 70ms);
+}
+
+.wmap__ping {
+  fill: none;
+  stroke: var(--c-ember);
+  stroke-width: 0.8;
+  opacity: 0;
+}
+
+.wmap.is-lit .wmap__dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.wmap.is-lit .wmap__ping {
+  animation: wmap-ping 2.4s ease-out infinite;
+  animation-delay: calc(var(--i) * 70ms + 600ms);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes wmap-ping {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3.2);
+  }
+}
+
+@media (max-width: 767px) {
+  .highlights__map {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wmap__dot {
+    transition: none;
+  }
+
+  .wmap.is-lit .wmap__ping {
+    animation: none;
   }
 }
