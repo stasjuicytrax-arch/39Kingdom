@@ -153,9 +153,12 @@ function mountMobileVideo(section: HTMLElement): void {
       const source = document.createElement('source');
       source.src = assetUrl('/video/hero-loop.mp4');
       source.type = 'video/mp4';
-      video!.appendChild(source);
-      video!.load();
-      video!.play().catch(() => {});
+      // after load: the ~900KB loop must not compete with the poster/LCP
+      afterLoad(() => {
+        video!.appendChild(source);
+        video!.load();
+        video!.play().catch(() => {});
+      });
     }
   }
 

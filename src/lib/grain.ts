@@ -1,6 +1,8 @@
 const FPS = 10;
 const TILE = 128;
 
+import { isMobileViewport } from './device-tier';
+
 export function mountGrain(): void {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canvas = document.createElement('canvas');
@@ -42,13 +44,19 @@ export function mountGrain(): void {
     ctx!.fillRect(0, 0, canvas.width, canvas.height);
   }
 
-  resize();
-  window.addEventListener('resize', resize);
+  // Static grain on reduced-motion and phones: a full-screen canvas repainted
+  // at 10fps keeps the page "visually changing" forever (Speed Index) and costs
+  // battery; the texture itself is what sells the look, not the flicker.
+  const isStatic = reduceMotion || isMobileViewport();
 
-  if (reduceMotion) {
-    draw();
-    return;
-  }
+  resize();
+  if (isStatic) draw();
+  window.addEventListener('resize', () => {
+    resize();
+    if (isStatic) draw(); // resizing a canvas clears it
+  });
+
+  if (isStatic) return;
 
   let last = 0;
   const frameMs = 1000 / FPS;
