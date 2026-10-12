@@ -8,6 +8,7 @@ import { lazyPoster } from '../lib/lazy-poster';
 import { isTouchDevice, prefersReducedMotion } from '../lib/reduced-motion';
 import { isMobileViewport } from '../lib/device-tier';
 import { assetUrl } from '../lib/asset-url';
+import { getLenis } from '../lib/smooth-scroll';
 
 gsap.registerPlugin(ScrollTrigger, Flip);
 
@@ -70,17 +71,21 @@ export function mountLive(root: HTMLElement): void {
     </div>
 
     <div class="live__stage" data-stage>
-      <div class="live__viewport" data-viewport data-cursor="drag">
-        <div class="live__track" data-track>
-          ${deck.map((item, i) => cardHtml(item, i)).join('')}
+      <div class="live__rail">
+        <div class="live__viewport" data-viewport data-cursor="drag" tabindex="0" role="group" aria-label="Live sets — use left and right arrow keys to browse">
+          <div class="live__track" data-track>
+            ${deck.map((item, i) => cardHtml(item, i)).join('')}
+          </div>
         </div>
+        <button type="button" class="live__nav live__nav--prev" data-nav="-1" data-cursor="link" aria-label="Previous set">←</button>
+        <button type="button" class="live__nav live__nav--next" data-nav="1" data-cursor="link" aria-label="Next set">→</button>
       </div>
 
-      <div class="live__timeline" data-timeline aria-hidden="true">
-        <div class="live__timeline-wave"></div>
+      <div class="live__timeline" data-timeline>
+        <div class="live__timeline-wave" aria-hidden="true"></div>
         <div class="live__timeline-bar"><div class="live__timeline-fill" data-timeline-fill></div></div>
         <div class="live__timeline-ticks">
-          ${deck.map((_, i) => `<span data-timeline-tick="${i}">${String(i + 1).padStart(2, '0')}</span>`).join('')}
+          ${deck.map((d, i) => `<button type="button" data-timeline-tick="${i}" data-cursor="link" aria-label="Go to ${d.caption}">${String(i + 1).padStart(2, '0')}</button>`).join('')}
         </div>
       </div>
     </div>
@@ -119,9 +124,9 @@ function cardHtml(item: DeckItem, i: number): string {
       </span>
       <span class="live__card-meta">
         <span class="live__card-caption">${item.caption}</span>
-        <span class="live__card-duration">${isYoutube ? item.meta : 'WATCH'}</span>
+        <span class="live__card-duration">${isYoutube ? item.meta : 'LIVE CLIP'}</span>
       </span>
-      ${isYoutube ? '<span class="pill-tag live__card-tag">FULL SET ↗</span>' : ''}
+      <span class="pill-tag live__card-tag">${isYoutube ? 'FULL SET ↗' : 'WATCH ↗'}</span>
     </button>
   `;
 }
@@ -240,23 +245,100 @@ function mountHorizontalScroll(section: HTMLElement, count: number): void {
 
   window.addEventListener('resize', () => trigger.refresh());
 
+  // Extra desktop controls. The pinned scrub stays the single source of truth:
+  // everything below only moves window scroll (through Lenis when active), so
+  // ScrollTrigger keeps driving the strip and the timeline.
+  const minY = () => trigger.start;
+  const maxY = () => trigger.end;
+  const span = () => Math.max(1, maxY() - minY());
+  const goTo = (y: number, immediate = false) => {
+    const target = Math.min(maxY(), Math.max(minY(), y));
+    const lenis = getLenis();
+    if (lenis) lenis.scrollTo(target, { immediate, duration: 0.9 });
+    else window.scrollTo({ top: target, behavior: immediate ? 'auto' : 'smooth' });
+  };
+  const lastIndex = Math.max(1, count - 1);
+  const nearestIndex = () => Math.round(((window.scrollY - minY()) / span()) * lastIndex);
+  const goToIndex = (i: number) => goTo(minY() + (Math.min(lastIndex, Math.max(0, i)) / lastIndex) * span());
+  // pointer px -> page-scroll px, so 1px of drag moves the strip ~1px
+  const dragRatio = () => span() / Math.max(1, trackWidth - viewport.clientWidth);
+
+  section.querySelectorAll<HTMLElement>('[data-nav]').forEach((btn) => {
+    btn.addEventListener('click', () => goToIndex(nearestIndex() + Number(btn.dataset.nav)));
+  });
+  ticks.forEach((tick, i) => tick.addEventListener('click', () => goToIndex(i)));
+
+  viewport.addEventListener('keydown', (e) => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    e.preventDefault();
+    goToIndex(nearestIndex() + (e.key === 'ArrowRight' ? 1 : -1));
+  });
+
+  // Sideways wheel / trackpad swipe moves the strip; a plain vertical wheel
+  // keeps scrolling the page (and so the pinned scrub) as before.
+  viewport.addEventListener(
+    'wheel',
+    (e) => {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      goTo(window.scrollY + e.deltaX * dragRatio(), true);
+    },
+    { passive: false }
+  );
+
   if (!isTouchDevice()) {
-    let dragging = false;
+    let down = false;
+    let moved = false;
     let startX = 0;
     let startScroll = 0;
+    let lastX = 0;
+    let lastT = 0;
+    let velocity = 0; // pointer px/ms, smoothed
+
     viewport.addEventListener('pointerdown', (e) => {
-      dragging = true;
-      startX = e.clientX;
+      down = true;
+      moved = false;
+      startX = lastX = e.clientX;
+      lastT = performance.now();
+      velocity = 0;
       startScroll = window.scrollY;
-      viewport.setPointerCapture(e.pointerId);
     });
     viewport.addEventListener('pointermove', (e) => {
-      if (!dragging) return;
-      window.scrollTo({ top: startScroll - (e.clientX - startX) });
+      if (!down) return;
+      if (!moved) {
+        if (Math.abs(e.clientX - startX) < 6) return;
+        moved = true;
+        viewport.setPointerCapture(e.pointerId);
+        viewport.classList.add('is-dragging');
+      }
+      const now = performance.now();
+      velocity = velocity * 0.6 + ((e.clientX - lastX) / Math.max(1, now - lastT)) * 0.4;
+      lastX = e.clientX;
+      lastT = now;
+      goTo(startScroll - (e.clientX - startX) * dragRatio(), true);
     });
-    const end = () => (dragging = false);
+    const end = (e: PointerEvent) => {
+      if (!down) return;
+      down = false;
+      viewport.classList.remove('is-dragging');
+      if (!moved) return;
+      // inertia: coast ~350ms worth of the release velocity
+      goTo(window.scrollY - velocity * 350 * dragRatio());
+      if (viewport.hasPointerCapture(e.pointerId)) viewport.releasePointerCapture(e.pointerId);
+    };
     viewport.addEventListener('pointerup', end);
     viewport.addEventListener('pointercancel', end);
+    // a drag must not count as a click on the card underneath
+    viewport.addEventListener(
+      'click',
+      (e) => {
+        if (!moved) return;
+        e.stopPropagation();
+        e.preventDefault();
+        moved = false;
+      },
+      true
+    );
   }
 }
 
@@ -277,6 +359,9 @@ function mountVerticalSwipe(
     ticks.forEach((t, idx) => t.classList.toggle('is-active', idx === i));
   }
   setActive(0);
+  ticks.forEach((tick, i) =>
+    tick.addEventListener('click', () => cards[i]?.scrollIntoView({ block: 'center', behavior: 'smooth' }))
+  );
 
   const io = new IntersectionObserver(
     (entries) => {

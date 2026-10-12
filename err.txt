@@ -1,0 +1,22 @@
+[13060:27376:1012/222919.239:WARNING:chrome\browser\extensions\external_registry_loader_win.cc:283] Error observing HKLM: 5
+[13060:27376:1012/222919.902:WARNING:chrome\browser\edge_pinned_sites\pinned_sites_cache.cc:304] Cache isn't initialized
+[13060:27376:1012/222919.968:INFO:CONSOLE:6150] "[ProtocolLaunch] handler constructed; wiring port events.", source: chrome-extension://ndcpkimcihhghdcddljkfmmjccdmcmof/background.rollup.js (6150)
+[13060:27376:1012/222920.018:ERROR:chrome\browser\task_manager\providers\fallback_task_provider.cc:126] Every renderer should have at least one task provided by a primary task provider. If a "Renderer" fallback task is shown, it is a bug. If you have repro steps, please file a new bug and tag it as a dependency of crbug.com/40528867.
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/GQ624tzHhRw/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/GQ624tzHhRw/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/GQ624tzHhRw/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/GQ624tzHhRw/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/yBzTz_OEzBU/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/yBzTz_OEzBU/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/yBzTz_OEzBU/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/yBzTz_OEzBU/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/u6ItRKTYuM8/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/u6ItRKTYuM8/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/u6ItRKTYuM8/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/u6ItRKTYuM8/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/H5QLvw5TydU/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/H5QLvw5TydU/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/H5QLvw5TydU/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222920.394:INFO:CONSOLE:0] "Tracking Prevention blocked access to storage for https://img.youtube.com/vi/H5QLvw5TydU/maxresdefault.jpg.", source: http://localhost:4190/39Kingdom/ (0)
+[13060:27376:1012/222921.913:WARNING:chrome\browser\edge_pinned_sites\pinned_sites_cache.cc:304] Cache isn't initialized
+[13060:27376:1012/222922.603:WARNING:chrome\browser\extensions\updater\extension_updater.cc:1581] Skipping UpdateExtension due to browser shutdown

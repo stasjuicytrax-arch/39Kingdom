@@ -1,21 +1,22 @@
 .contact {
   position: relative;
-  min-height: 100svh;
+  min-height: 85svh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: var(--s-5);
   text-align: center;
-  padding-block: var(--section-gap);
+  padding-block: clamp(64px, 8vw, 128px);
   background: var(--g-heat);
   overflow: hidden;
 }
 
 .contact__symbol {
-  position: absolute;
-  top: var(--s-8);
-  left: 50%;
-  transform: translateX(-50%);
-  width: 72px;
+  position: relative;
+  z-index: 1;
+  flex: none;
+  width: clamp(96px, 10vw, 160px);
   height: auto;
   opacity: 0.85;
   animation: contact-pulse var(--beat) ease-in-out infinite alternate;
@@ -37,7 +38,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--s-6);
-  padding-top: var(--s-9);
+  padding-top: var(--s-6);
 }
 
 .contact__heading {

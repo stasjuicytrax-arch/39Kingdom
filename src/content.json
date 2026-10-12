@@ -277,7 +277,11 @@
       { "slug": "with-morten-seven-dubai", "caption": "WITH MORTEN, SEVEN — DUBAI" },
       { "slug": "with-vinai-dubai", "caption": "WITH VINAI — DUBAI" }
     ],
-    "triptych": ["recognition-bw-1", "recognition-bw-2", "recognition-bw-3"]
+    "triptych": [
+      { "slug": "recognition-bw-1", "maxWidth": 1280, "alt": "39 KINGDOM backstage with Oliver Heldens, DJ Snake and Tiësto, black and white" },
+      { "slug": "recognition-bw-2", "maxWidth": 640, "alt": "39 KINGDOM with Axwell & Ingrosso in a backstage tent, black and white" },
+      { "slug": "recognition-bw-3", "maxWidth": 640, "alt": "39 KINGDOM with two fellow DJs at night behind the stage, black and white" }
+    ]
   },
 
   "social": {

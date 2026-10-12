@@ -8,7 +8,7 @@ import { assetUrl } from '../lib/asset-url';
 gsap.registerPlugin(ScrollTrigger);
 
 const COLUMN_COUNT = 4;
-const COLUMN_PARALLAX = [-10, 14, -8, 12]; // yPercent range per column, alternating direction
+const COLUMN_PARALLAX = [-4, 6, -3, 5]; // yPercent range per column, alternating direction
 
 export function mountSocial(root: HTMLElement): void {
   const social = content.social;

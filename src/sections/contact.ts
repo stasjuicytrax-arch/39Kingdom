@@ -89,8 +89,8 @@ function mountHeatingText(section: HTMLElement): void {
   gsap.set(split.chars, { opacity: 0, yPercent: 40 });
 
   ScrollTrigger.create({
-    trigger: heading,
-    start: 'top 85%',
+    trigger: section, // fires as soon as Contact enters the screen: never an empty first view
+    start: 'top 95%',
     once: true,
     onEnter: () =>
       gsap.to(split.chars, { opacity: 1, yPercent: 0, duration: 0.8, stagger: 0.025, ease: 'power3.out' }),

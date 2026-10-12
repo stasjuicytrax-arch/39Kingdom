@@ -65,3 +65,5 @@ Spontaneous calls made while building, with reasoning, per CLAUDE.md's instructi
 - Паузы между секциями: `--section-gap` теперь «на сторону» clamp(48px, 5vw, 80px) → стык двух секций = clamp(96px, 10vw, 160px) (раньше 2×256px). Hero-внутренний padding не трогали.
 - About-портрет: object-position top, img 110% высоты, параллакс -4.5% (голова не уходит за кадр); на ≤1279px кадр 4/5 вместо 16/10.
 - Header: справа зарезервировано 108px под фиксированную кнопку MENU.
+- Recognition триптих: источники bw-2 (834px) и bw-3 (902px) мельче 1280, images.mjs не апскейлит → файлов -1280 нет (404). В content.json у триптиха теперь `maxWidth` и уникальный `alt`; код берёт min(1280, maxWidth).
+- Live: все карточки 4:5; pinned-scrub остаётся основным режимом, drag/wheel/стрелки/клавиши/клик по таймлайну только двигают window scroll (через Lenis) — без второго источника истины.

@@ -56,15 +56,21 @@ export function mountRecognition(root: HTMLElement): void {
     <div class="container recognition__triptych">
       ${rec.triptych
         .map(
-          (slug) => `
+          (p) => {
+          // Source photos are small: images.mjs never upscales, so only widths
+          // up to p.maxWidth exist on disk (bw-2/bw-3 stop at 640).
+          const w = Math.min(1280, p.maxWidth);
+          const file = (ext: string) => assetUrl(`/img/recognition/${p.slug}-${w}.${ext}`);
+          return `
         <figure class="recognition__frame" data-rgb-frame>
           <picture>
-            <source type="image/avif" srcset="${assetUrl(`/img/recognition/${slug}-1280.avif`)}" />
-            <source type="image/webp" srcset="${assetUrl(`/img/recognition/${slug}-1280.webp`)}" />
-            <img data-rgb-img src="${assetUrl(`/img/recognition/${slug}-1280.jpg`)}" alt="39 KINGDOM with international artists" loading="lazy" decoding="async" />
+            <source type="image/avif" srcset="${file('avif')}" />
+            <source type="image/webp" srcset="${file('webp')}" />
+            <img data-rgb-img src="${file('jpg')}" alt="${p.alt}" loading="lazy" decoding="async" />
           </picture>
           <canvas class="recognition__frame-fx" data-rgb-canvas aria-hidden="true"></canvas>
-        </figure>`
+        </figure>`;
+        }
         )
         .join('')}
     </div>

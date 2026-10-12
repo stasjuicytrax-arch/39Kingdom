@@ -35,7 +35,8 @@
 }
 
 .live__head {
-  padding-block: var(--s-8);
+  padding-top: clamp(48px, 6vw, 96px);
+  padding-bottom: var(--s-5);
 }
 
 .live__title {
@@ -52,7 +53,52 @@
 .live__stage {
   position: relative;
   background: var(--c-void);
-  padding-block: var(--s-6);
+  padding-block: 0 var(--s-6);
+}
+
+.live__rail {
+  position: relative;
+}
+
+.live__viewport.is-dragging {
+  user-select: none;
+}
+
+.live__viewport:focus-visible {
+  outline: 1px solid var(--c-ember);
+  outline-offset: -1px;
+}
+
+.live__nav {
+  position: absolute;
+  top: 40%;
+  z-index: 3;
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(239, 237, 235, 0.35);
+  background: rgba(7, 4, 4, 0.55);
+  color: var(--c-bone);
+  font-family: var(--ff-mono);
+  font-size: 20px;
+  cursor: none;
+  transition: background-color var(--dur-fast) var(--ease-soft), border-color var(--dur-fast) var(--ease-soft);
+}
+
+.live__nav:hover {
+  background: var(--c-blood);
+  border-color: var(--c-blood);
+}
+
+.live__nav--prev {
+  left: var(--grid-margin);
+}
+
+.live__nav--next {
+  right: var(--grid-margin);
 }
 
 .live__viewport {
@@ -93,12 +139,14 @@
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
 }
 
-.live__card--local .live__card-media {
-  aspect-ratio: 9 / 16;
+/* one frame for every card: 9:16 clips and 16:9 YouTube thumbs are both
+   cover-cropped into 4:5 */
+.live__card-media {
+  aspect-ratio: 4 / 5;
 }
 
-.live__card--youtube .live__card-media {
-  aspect-ratio: 16 / 9;
+.live__card--youtube .live__card-media img {
+  object-position: center;
 }
 
 .live__card-media video,
@@ -199,7 +247,18 @@
   color: var(--c-ash);
 }
 
-.live__timeline-ticks span.is-active {
+.live__timeline-ticks button {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: var(--s-2) var(--s-2) 0;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: none;
+}
+
+.live__timeline-ticks button.is-active {
   color: var(--c-ember);
 }
 
@@ -298,8 +357,8 @@
     cursor: auto;
   }
 
-  .live__viewport.is-vertical-swipe .live__card-media {
-    max-height: 60svh;
+  .live__nav {
+    display: none;
   }
 }
 

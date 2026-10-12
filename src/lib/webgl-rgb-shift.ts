@@ -85,6 +85,9 @@ export function playRgbShiftReveal(canvas: HTMLCanvasElement, img: HTMLImageElem
 
     const start = performance.now();
     canvas.classList.add('is-active');
+    // never leave the canvas covering the <img> if the GL side misbehaves
+    const bail = () => canvas.classList.remove('is-active');
+    canvas.addEventListener('webglcontextlost', bail, { once: true });
 
     function frame(now: number): void {
       const elapsed = now - start;
@@ -92,12 +95,17 @@ export function playRgbShiftReveal(canvas: HTMLCanvasElement, img: HTMLImageElem
       const eased = 1 - Math.pow(1 - progress, 3);
       program.uniforms.uAmount.value = 1 - eased;
       program.uniforms.uTime.value = elapsed / 1000;
-      renderer.render({ scene: mesh });
+      try {
+        renderer.render({ scene: mesh });
+      } catch {
+        bail();
+        return;
+      }
 
       if (progress < 1) {
         requestAnimationFrame(frame);
       } else {
-        canvas.classList.remove('is-active');
+        bail();
       }
     }
     requestAnimationFrame(frame);
