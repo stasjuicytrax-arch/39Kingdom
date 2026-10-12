@@ -137,3 +137,11 @@
     background-position: 50% 50%;
   }
 }
+
+@media (max-width: 767px) {
+  /* "THANK YOU" is ~3.6em wide at wdth 62: size it to the screen, never wrap mid-word */
+  .contact__heading {
+    font-size: calc((100vw - 2 * var(--grid-margin)) / 3.9);
+    white-space: nowrap;
+  }
+}

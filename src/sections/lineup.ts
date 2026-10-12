@@ -5,6 +5,7 @@ import content from '../content.json';
 import { overlineHtml } from '../components/overline';
 import { isTouchDevice, prefersReducedMotion } from '../lib/reduced-motion';
 import { assetUrl } from '../lib/asset-url';
+import { isMobileViewport } from '../lib/device-tier';
 
 gsap.registerPlugin(ScrollTrigger, Flip);
 
@@ -36,7 +37,7 @@ export function mountLineup(root: HTMLElement): void {
               <picture>
                 <source type="image/avif" srcset="${srcset(p.slug, 'avif')}" sizes="320px" />
                 <source type="image/webp" srcset="${srcset(p.slug, 'webp')}" sizes="320px" />
-                <img src="${assetUrl(`/img/lineup/${p.slug}-640.jpg`)}" srcset="${srcset(p.slug, 'jpg')}" sizes="320px" alt="" loading="lazy" decoding="async" />
+                <img src="${assetUrl(`/img/lineup/${p.slug}-640.jpg`)}" srcset="${srcset(p.slug, 'jpg')}" sizes="320px" alt="" loading="${i < 3 ? 'eager' : 'lazy'}" decoding="async" />
               </picture>
               <span class="lineup__card-shine" aria-hidden="true"></span>
             </span>
@@ -56,7 +57,7 @@ export function mountLineup(root: HTMLElement): void {
 }
 
 function srcset(slug: string, ext: string): string {
-  const widths = [640, 1024, 1440, 1920];
+  const widths = [640]; // posters are only exported at 640w (images.mjs never upscales)
   return widths.map((w) => `${assetUrl(`/img/lineup/${slug}-${w}.${ext}`)} ${w}w`).join(', ');
 }
 
@@ -69,6 +70,12 @@ function mountCarousel(section: HTMLElement, count: number): void {
   // Card width is fluid (CSS --lineup-card-w, scales with viewport height).
   const getTrackWidth = () => count * ((cards[0]?.offsetWidth ?? 320) + CARD_GAP);
   const reduced = prefersReducedMotion();
+
+  // Phones: no pin / scrub — a native horizontal scroll-snap strip (CSS).
+  if (isMobileViewport()) {
+    viewport.classList.add('is-swipe');
+    return;
+  }
 
   function styleCards(): void {
     // Read every card's rect first, then write — interleaving

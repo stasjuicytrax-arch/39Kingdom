@@ -290,6 +290,11 @@
 }
 
 @media (max-width: 767px) {
+  /* 9 letters at wdth 62 are ~4.1em wide: size the word to the screen */
+  .hero__wordmark-inner {
+    font-size: calc((100vw - 2 * var(--grid-margin)) / 4.25);
+  }
+
   .hero__content {
     padding-block: var(--s-8) clamp(140px, 42vw, 260px);
   }

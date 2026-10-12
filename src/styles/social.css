@@ -140,3 +140,10 @@
     transition: none;
   }
 }
+
+@media (max-width: 767px) {
+  /* "@THE39KINGDOM" (13 glyphs, wdth 62) must fit between the page margins */
+  .social__handle {
+    font-size: min(var(--fs-h1), calc((100vw - 2 * var(--grid-margin)) / 6.6));
+  }
+}

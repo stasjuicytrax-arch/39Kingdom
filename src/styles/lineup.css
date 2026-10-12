@@ -188,12 +188,43 @@
 }
 
 @media (max-width: 767px) {
+  .lineup {
+    min-height: 0;
+    justify-content: flex-start;
+    padding-block: clamp(48px, 10vw, 72px);
+  }
+
+  .lineup__head {
+    margin-bottom: var(--s-4);
+  }
+
+  .lineup__viewport {
+    padding-block: var(--s-3);
+  }
+
   .lineup__card {
-    width: 260px;
+    width: min(70vw, 280px);
+    scroll-snap-align: center;
   }
 
   .lineup__track {
-    padding-inline: max(var(--grid-margin), calc(50vw - 130px));
+    width: auto;
+    padding-inline: max(var(--grid-margin), calc(50vw - min(70vw, 280px) / 2));
+  }
+
+  /* native swipe strip instead of the desktop pin+scrub */
+  .lineup__viewport.is-swipe {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    scrollbar-width: none;
+    cursor: auto;
+  }
+
+  .lineup__viewport.is-swipe::-webkit-scrollbar {
+    display: none;
   }
 }
 

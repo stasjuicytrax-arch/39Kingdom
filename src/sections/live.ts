@@ -56,13 +56,13 @@ export function mountLive(root: HTMLElement): void {
   section.setAttribute('aria-label', live.title);
 
   section.innerHTML = `
-    <div class="live__intro" data-intro>
+    ${isMobileViewport() ? '' : `<div class="live__intro" data-intro>
       <video class="live__intro-video" data-intro-video data-poster="${live.localVideos[0]?.poster ?? ''}" muted loop playsinline preload="none" aria-hidden="true">
         <source src="${live.localVideos[0] ? assetUrl(live.localVideos[0].card.webm) : ''}" type="video/webm" />
         <source src="${live.localVideos[0] ? assetUrl(live.localVideos[0].card.mp4) : ''}" type="video/mp4" />
       </video>
       <p class="live__intro-word" aria-hidden="true">live.</p>
-    </div>
+    </div>`}
 
     <div class="live__pin" data-pin>
     <div class="container live__head">
@@ -80,6 +80,8 @@ export function mountLive(root: HTMLElement): void {
         <button type="button" class="live__nav live__nav--prev" data-nav="-1" data-cursor="link" aria-label="Previous set">←</button>
         <button type="button" class="live__nav live__nav--next" data-nav="1" data-cursor="link" aria-label="Next set">→</button>
       </div>
+
+      <p class="live__counter" data-live-counter aria-live="polite">01 / ${String(deck.length).padStart(2, '0')}</p>
 
       <div class="live__timeline" data-timeline>
         <div class="live__timeline-wave" aria-hidden="true"></div>
@@ -208,7 +210,7 @@ function mountHorizontalScroll(section: HTMLElement, count: number): void {
   // mobile it becomes a plain vertical swipe-slider through the (mostly
   // 9:16) cards, no page-scroll hijacking.
   if (isMobileViewport()) {
-    mountVerticalSwipe(viewport, cards, fill, ticks);
+    mountHorizontalSwipe(section, viewport, cards, fill, ticks);
     return;
   }
 
@@ -350,38 +352,33 @@ function mountHorizontalScroll(section: HTMLElement, count: number): void {
   }
 }
 
-/** Mobile fallback for the horizontal pinned carousel: a native vertical
- * scroll-snap slider (CSS does the swiping; this just keeps the timeline
- * in sync with whichever card is centered). */
-function mountVerticalSwipe(
+/** Phones: a native horizontal scroll-snap strip (no pin, no Lenis capture on
+ * the gesture). This only mirrors the scroll position into the counter and
+ * the timeline. */
+function mountHorizontalSwipe(
+  section: HTMLElement,
   viewport: HTMLElement,
   cards: HTMLElement[],
   fill: HTMLElement | null,
   ticks: HTMLElement[]
 ): void {
-  viewport.classList.add('is-vertical-swipe');
+  viewport.classList.add('is-swipe');
   if (!cards.length) return;
+  const counter = section.querySelector<HTMLElement>('[data-live-counter]');
 
-  function setActive(i: number): void {
+  const update = () => {
+    const first = cards[0];
+    const step = (cards[1]?.offsetLeft ?? first.offsetLeft + first.offsetWidth) - first.offsetLeft || 1;
+    const i = Math.min(cards.length - 1, Math.max(0, Math.round(viewport.scrollLeft / step)));
     if (fill) fill.style.transform = `scaleX(${(i + 1) / cards.length})`;
     ticks.forEach((t, idx) => t.classList.toggle('is-active', idx === i));
-  }
-  setActive(0);
+    if (counter) counter.textContent = `${String(i + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+  };
+  update();
+  viewport.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
   ticks.forEach((tick, i) =>
-    tick.addEventListener('click', () => cards[i]?.scrollIntoView({ block: 'center', behavior: 'smooth' }))
+    tick.addEventListener('click', () => cards[i]?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' }))
   );
-
-  const io = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        const i = cards.indexOf(entry.target as HTMLElement);
-        if (i >= 0) setActive(i);
-      }
-    },
-    { root: viewport, threshold: 0.6 }
-  );
-  cards.forEach((card) => io.observe(card));
 }
 
 function mountCardVideos(section: HTMLElement): void {

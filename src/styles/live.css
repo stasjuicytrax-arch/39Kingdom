@@ -340,40 +340,71 @@
   border-radius: var(--r-card);
 }
 
+.live__counter {
+  display: none;
+}
+
 @media (max-width: 767px) {
+  .live__pin {
+    min-height: 0;
+    gap: var(--s-5);
+    padding-block: clamp(48px, 10vw, 72px);
+  }
+
+  .live__head {
+    padding: 0;
+  }
+
   .live__stage {
-    padding-block: var(--s-4);
+    padding-block: 0;
   }
 
-  /* lib/sections/live.ts's mountVerticalSwipe(): native scroll-snap stack,
-     cards swiped vertically instead of the desktop pin+horizontal-scrub. */
-  .live__viewport.is-vertical-swipe {
-    height: 78svh;
-    overflow-y: auto;
-    overflow-x: hidden;
-    scroll-snap-type: y mandatory;
+  /* lib/sections/live.ts mountHorizontalSwipe(): native scroll-snap strip */
+  .live__viewport.is-swipe {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    scrollbar-width: none;
     cursor: auto;
   }
 
-  .live__viewport.is-vertical-swipe .live__track {
-    width: auto;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--s-6);
-    padding-inline: var(--grid-margin);
-    padding-block: var(--s-6);
-  }
-
-  .live__viewport.is-vertical-swipe .live__card {
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-    width: min(100%, 300px, calc(56svh * 9 / 16));
-    cursor: auto;
-  }
-
-  .live__nav {
+  .live__viewport.is-swipe::-webkit-scrollbar {
     display: none;
+  }
+
+  .live__viewport.is-swipe .live__track {
+    width: auto;
+    padding-inline: var(--grid-margin);
+    gap: var(--s-4);
+  }
+
+  .live__viewport.is-swipe .live__card {
+    width: min(68vw, 270px);
+    scroll-snap-align: start;
+    cursor: auto;
+  }
+
+  .live__nav,
+  .live__timeline-wave,
+  .live__timeline-ticks {
+    display: none;
+  }
+
+  .live__counter {
+    display: block;
+    margin: var(--s-4) 0 0;
+    padding-inline: var(--grid-margin);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-small);
+    letter-spacing: var(--ls-meta);
+    color: var(--c-ember);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .live__timeline {
+    padding-top: var(--s-2);
   }
 }
 

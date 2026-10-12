@@ -79,6 +79,13 @@
   padding-bottom: 1px;
 }
 
+@media (max-width: 479px) {
+  /* logo + BOOK + MENU is all that fits on a phone */
+  .site-header__section-number {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .site-header {
     transition: none;
