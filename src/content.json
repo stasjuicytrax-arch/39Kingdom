@@ -44,7 +44,7 @@
     ],
     "tags": ["MELODIC TECHNO", "TECH HOUSE", "INDIE DANCE", "LIVE VOCALS", "GUITAR", "DRUMS"],
     "portrait": { "section": "about", "slug": "about-portrait" },
-    "pillVideo": { "poster": "/video/india-poster.jpg", "mp4": "/video/india-pill.mp4", "webm": "/video/india-pill.webm" }
+    "pillVideo": { "poster": "/video/india-pill-poster.jpg", "mp4": "/video/india-pill.mp4", "webm": "/video/india-pill.webm" }
   },
 
   "highlights": {
