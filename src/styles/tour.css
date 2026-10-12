@@ -73,7 +73,7 @@
   font-family: var(--ff-mono);
   font-size: var(--fs-meta);
   letter-spacing: var(--ls-meta);
-  color: var(--c-blood);
+  color: var(--c-ember);
 }
 
 .tour__next-line {
@@ -222,7 +222,7 @@
   opacity: 0;
   visibility: hidden;
   transform: translate(-50%, -50%);
-  box-shadow: var(--glow-ember);
+  box-shadow: var(--shadow-float);
 }
 
 .tour__preview img {

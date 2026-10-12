@@ -203,7 +203,7 @@
   opacity: 0;
   visibility: hidden;
   transform: translate(-50%, -50%);
-  box-shadow: var(--glow-ember);
+  box-shadow: var(--shadow-float);
 }
 
 .highlights__preview img {

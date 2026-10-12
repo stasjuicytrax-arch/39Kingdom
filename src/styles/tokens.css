@@ -90,6 +90,7 @@
 
   /* ---------- Effects ---------- */
   --grain-opacity: 0.08;
+  --shadow-float: 0 24px 48px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.4);
   --glow-ember: 0 0 40px rgba(229, 82, 12, .45), 0 0 120px rgba(200, 32, 26, .25);
 
   /* ---------- Z ---------- */

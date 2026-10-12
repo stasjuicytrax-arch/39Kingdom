@@ -72,3 +72,4 @@ Spontaneous calls made while building, with reasoning, per CLAUDE.md's instructi
 - Perf: зерно статично на мобиле (постоянная перерисовка 10fps держала Speed Index), hero-loop видео стартует после load, отдельный 35KB постер для pill-видео (было 379KB).
 - Contact «пустой экран»: корень — `background-clip:text` на родителе + SplitText (трансформированные дети не клипались, THANK YOU был невидим). Градиент перенесён на буквы; символ внутри .contact__inner, высота по содержимому.
 - Live: заголовок+лента+таймлайн — один pin-блок `.live__pin` по центру экрана; карточки 9:16, ширина `--live-card-w` от высоты окна. Line-up: фоновое слово удалено.
+- Impeccable audit: сознательно оставлены (бриф/DESIGN.md главнее craft-floor): надзаголовок ✱ (0N) и нумерация секций, градиент-текст THANK YOU, tracking −0.045/−0.06em у display, glow у красного orb и символа (пульс 124 BPM). Исправлено: контраст, длинные caps-подписи, glow у floating-превью, touch target, browser surfaces.

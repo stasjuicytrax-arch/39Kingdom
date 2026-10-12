@@ -5,6 +5,7 @@ import content from '../content.json';
 import { overlineHtml } from '../components/overline';
 import { isTouchDevice, prefersReducedMotion } from '../lib/reduced-motion';
 import { assetUrl } from '../lib/asset-url';
+import { titleCaps } from '../lib/text';
 import { isMobileViewport } from '../lib/device-tier';
 
 gsap.registerPlugin(ScrollTrigger, Flip);
@@ -41,7 +42,7 @@ export function mountLineup(root: HTMLElement): void {
               </picture>
               <span class="lineup__card-shine" aria-hidden="true"></span>
             </span>
-            <span class="lineup__card-caption">${p.caption}</span>
+            <span class="lineup__card-caption">${titleCaps(p.caption)}</span>
           </button>`
           )
           .join('')}

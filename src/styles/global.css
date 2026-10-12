@@ -91,3 +91,21 @@ canvas#grain {
     opacity: calc(var(--grain-opacity) * 0.5);
   }
 }
+
+/* ---------- Browser surfaces themed from the palette ---------- */
+html {
+  scrollbar-color: var(--c-smoke) var(--c-void);
+  caret-color: var(--c-ember);
+}
+
+::selection {
+  background: var(--c-blood);
+  color: var(--c-bone);
+}
+
+/* the site hides the native cursor, so keyboard focus must be unmistakable;
+   components with their own focus styles override this */
+:focus-visible {
+  outline: 2px solid var(--c-ember);
+  outline-offset: 3px;
+}

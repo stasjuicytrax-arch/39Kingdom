@@ -201,10 +201,9 @@
 }
 
 .live__card-caption {
-  font-family: var(--ff-mono);
-  font-size: var(--fs-small);
-  letter-spacing: var(--ls-meta);
-  text-transform: uppercase;
+  font-family: var(--ff-body);
+  font-size: 14px;
+  line-height: 1.35;
   color: var(--c-bone);
 }
 

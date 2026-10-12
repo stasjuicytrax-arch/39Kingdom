@@ -8,6 +8,7 @@ import { lazyPoster } from '../lib/lazy-poster';
 import { isTouchDevice, prefersReducedMotion } from '../lib/reduced-motion';
 import { isMobileViewport } from '../lib/device-tier';
 import { assetUrl } from '../lib/asset-url';
+import { titleCaps } from '../lib/text';
 import { getLenis } from '../lib/smooth-scroll';
 
 gsap.registerPlugin(ScrollTrigger, Flip);
@@ -127,7 +128,7 @@ function cardHtml(item: DeckItem, i: number): string {
         <span class="live__card-play" aria-hidden="true">▶</span>
       </span>
       <span class="live__card-meta">
-        <span class="live__card-caption">${item.caption}</span>
+        <span class="live__card-caption">${titleCaps(item.caption)}</span>
         <span class="live__card-duration">${isYoutube ? item.meta : 'LIVE CLIP'}</span>
       </span>
       <span class="pill-tag live__card-tag">${isYoutube ? 'FULL SET ↗' : 'WATCH ↗'}</span>
