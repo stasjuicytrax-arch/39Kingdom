@@ -113,7 +113,7 @@
   background: rgba(7, 4, 4, 0.6);
   backdrop-filter: blur(6px);
   font-family: var(--ff-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: var(--ls-meta);
   text-transform: uppercase;
   color: var(--c-bone);

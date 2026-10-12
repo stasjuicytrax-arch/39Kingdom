@@ -80,7 +80,6 @@
   font-family: var(--ff-mono);
   font-size: var(--fs-small);
   letter-spacing: var(--ls-meta);
-  text-transform: uppercase;
   color: var(--c-text-2);
   flex: none;
 }

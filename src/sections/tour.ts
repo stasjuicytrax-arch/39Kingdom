@@ -6,6 +6,7 @@ import { pillTagHtml } from '../components/buttons';
 import { getNextShow, isPlayed, formatShortDate, countdownTo, type TourDate } from '../lib/tour-helpers';
 import { isTouchDevice, prefersReducedMotion } from '../lib/reduced-motion';
 import { assetUrl } from '../lib/asset-url';
+import { titleCaps } from '../lib/text';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,7 +42,7 @@ export function mountTour(root: HTMLElement): void {
       <div class="tour__list" data-list>
         ${tour.dates.map((d, i) => rowHtml(d, i, nextShow)).join('')}
       </div>
-      <p class="tour__footnote">${tour.footnote}</p>
+      <p class="tour__footnote">${titleCaps(tour.footnote)}</p>
     </div>
 
     <div class="tour__preview" data-preview aria-hidden="true">

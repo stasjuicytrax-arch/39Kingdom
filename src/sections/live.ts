@@ -95,7 +95,7 @@ export function mountLive(root: HTMLElement): void {
 
     </div>
 
-    <p class="live__footnote container">${live.footnote}</p>
+    <p class="live__footnote container">${titleCaps(live.footnote)}</p>
 
     <div class="live-player" data-player aria-hidden="true">
       <button type="button" class="live-player__close" data-cursor="link" aria-label="Close player">CLOSE ✕</button>

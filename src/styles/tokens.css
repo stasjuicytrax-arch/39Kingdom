@@ -18,7 +18,7 @@
   --c-bone:        #EFEDEB;
   --c-ash:         #8A7F7B;
   --c-smoke:       #2A2322;
-  --c-mute-light:  #B7A7A3; /* приглушённые слова на светлой секции */
+  --c-mute-light:  #8A7873; /* приглушённые слова на светлой секции */
 
   --c-bg:          var(--c-void);
   --c-surface:     var(--c-night);
@@ -104,7 +104,7 @@
 .theme-bone {
   --c-bg: var(--c-bone);
   --c-text: var(--c-oxblood);
-  --c-text-2: var(--c-mute-light);
+  --c-text-2: #5E4E4A; /* secondary text on bone: 5.9:1 */
   --c-line: #D9D2CF;
 }
 

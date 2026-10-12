@@ -24,7 +24,7 @@ export function mountLineup(root: HTMLElement): void {
     <div class="container lineup__head">
       ${overlineHtml(4)}
       <h2 class="lineup__title">${lineup.title}</h2>
-      <p class="lineup__subtitle">${lineup.subtitle}</p>
+      <p class="lineup__subtitle">${titleCaps(lineup.subtitle)}</p>
     </div>
     <div class="lineup__viewport" data-viewport data-cursor="drag">
       <div class="lineup__track" data-track>
